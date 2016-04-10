@@ -607,47 +607,47 @@ public class DansaGUI extends javax.swing.JFrame {
         {
             index = 0;
         }
-//        showDancerData(index);
+        showDancerData(index);
     }//GEN-LAST:event_dancersJListValueChanged
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
-//        // Add new city
-//        try
-//        {
-//            // Create and display a new AddDialog
-//            AddCity addCity = new AddCity(this, true);
-//            addCity.setLocationRelativeTo(this);
-//            addCity.setVisible(true);
-//
-//            // The modal dialog takes focus, upon regaining focus:
-//            City newCity = addCity.getCity();
-//
-//            if (newCity != null && !dancerExists(newCity))
-//            {
-//                // Add the new city to the database
-//                cities.add(newCity);
-//                displayDancers();                  //refresh GUI
-//                searchDancer(newCity.getName());    //highlight added city
-//
-//                //save new city to file
-//                saveDancers();
-//            }
-//            else
-//            {
-//                JOptionPane.showMessageDialog(null, "City not Added",
-//                    "City is null or already exists", JOptionPane.WARNING_MESSAGE);
-//                dancersJList.setVisible(true);
-//                dancersJList.setSelectedIndex(0);
-//            }
-//
-//        }
-//        catch (NullPointerException nullex)
-//        {
-//            JOptionPane.showMessageDialog(null, "City not Added", "Input Error",
-//                JOptionPane.WARNING_MESSAGE);
-//            dancersJList.setVisible(true);
-//            dancersJList.setSelectedIndex(0);
-//        }
+        // Add new dancer
+        try
+        {
+            // Create and display a new AddDialog
+            AddDancer addDancer = new AddDancer(this, true);
+            addDancer.setLocationRelativeTo(this);
+            addDancer.setVisible(true);
+
+            // The modal dialog takes focus, upon regaining focus:
+            Dancer newDancer = addDancer.getDancer();
+
+            if (newDancer != null && !dancerExists(newDancer))
+            {
+                // Add the new city to the database
+                dancers.add(newDancer);
+                displayDancers();                  //refresh GUI
+                searchDancer(newDancer.getName());    //highlight added city
+
+                //save new city to file
+                saveDancers();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Dancer not Added",
+                    "Dancer is null or already exists", JOptionPane.WARNING_MESSAGE);
+                dancersJList.setVisible(true);
+                dancersJList.setSelectedIndex(0);
+            }
+
+        }
+        catch (NullPointerException nullex)
+        {
+            JOptionPane.showMessageDialog(null, "Dancer not Added", "Input Error",
+                JOptionPane.WARNING_MESSAGE);
+            dancersJList.setVisible(true);
+            dancersJList.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void editJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJButtonActionPerformed
