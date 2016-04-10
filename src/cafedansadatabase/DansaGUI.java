@@ -20,7 +20,7 @@ public class DansaGUI extends javax.swing.JFrame {
     /** 
      * Class instance ArrayList of City objects.
      */
-    private ArrayList<Dancer> cities = new ArrayList<>();
+    private ArrayList<Dancer> dancers = new ArrayList<>();
         
     /**
      * External file name of cities.
@@ -36,7 +36,7 @@ public class DansaGUI extends javax.swing.JFrame {
      */
     public DansaGUI() {
         initComponents();
-                this.getRootPane().setDefaultButton(addJButton); //set buttonAdd as default
+        this.getRootPane().setDefaultButton(addJButton); //set buttonAdd as default
         this.setIconImage(Toolkit.getDefaultToolkit().
                 getImage("src/USACities/buckinghamfountain_small.jpg"));
         //centers the form at start.
@@ -47,8 +47,8 @@ public class DansaGUI extends javax.swing.JFrame {
         readFromFile(fileName);
         
         // Show the city names in the JList
-        displayCities();
-        showCityData(citiesJList.getSelectedIndex());
+        displayDancers();
+        showDancerData(dancersJList.getSelectedIndex());
     }
 
      /**
@@ -69,19 +69,19 @@ public class DansaGUI extends javax.swing.JFrame {
      */
     public void readFromFile(String file)            
     {
-        cities.clear();
-        CityFileReader reader = new CityFileReader(file);
+        dancers.clear();
+        DancerFileReader reader = new DancerFileReader(file);
         String line = null;
         while ((line = reader.readRecord()) != null) {
-            String[] city_info = line.split(",");
-            City city = new City(city_info);
-            cities.add(city);
+            String[] dancerInfo = line.split(",");
+            Dancer dancer = new Dancer(dancerInfo);
+            dancers.add(dancer);
         }
         reader.close();
     }
     
     /**
-     * Method: displayCities()
+     * Method: displayDancers()
      * Displays cities in JList sorted by level = 0 using selection sort
      * algorithm or last name = 1 using the insertion sort algorithm.
      * @parem void
@@ -92,40 +92,40 @@ public class DansaGUI extends javax.swing.JFrame {
      * @see #selectionSort
      * @see #insetionSort
      */
-    private void displayCities()
+    private void displayDancers()
     {
-        int location = citiesJList.getSelectedIndex();
-        String[] cityNames = new String[cities.size()];
+        int location = dancersJList.getSelectedIndex();
+        String[] cityNames = new String[dancers.size()];
         if (popJRadioButtonMenuItem.isSelected()) {
-            selectionSort(cities);
-            for (int i = 0; i < cities.size(); i++) {
-                cityNames[i] = cities.get(i).getName() + ", " +
-                               cities.get(i).getPopulation() + " mil.";
+            selectionSort(dancers);
+            for (int i = 0; i < dancers.size(); i++) {
+                cityNames[i] = dancers.get(i).getName() + ", " +
+                               dancers.get(i).getYears() + " years.";
             }
         } else {
-            insertionSort(cities);
-            for (int i = 0; i < cities.size(); i++) {
-                cityNames[i] = cities.get(i).getName();
+            insertionSort(dancers);
+            for (int i = 0; i < dancers.size(); i++) {
+                cityNames[i] = dancers.get(i).getName();
             }
         }
-        citiesJList.setListData(cityNames);
-        if (location != -1 && location < cities.size()) {
-            citiesJList.setSelectedIndex(location);
+        dancersJList.setListData(cityNames);
+        if (location != -1 && location < dancers.size()) {
+            dancersJList.setSelectedIndex(location);
         } else {
-            citiesJList.setSelectedIndex(0);
+            dancersJList.setSelectedIndex(0);
         }
     }
 
     /**
      * Method: insertionSort
-     * Sorts ArrayList cities in ascending order by name. Uses the insertion
+     * Sorts ArrayList dancers in ascending order by name. Uses the insertion
      * sort algorithm which inserts city at correct position and shuffles
      * everyone else below that position.
-     * @param cities
+     * @param dancers
      */
-    public static void insertionSort(ArrayList <City> cities) {
-	InsertionSortCityName sorter = new InsertionSortCityName();
-        sorter.sort(cities);
+    public static void insertionSort(ArrayList <Dancer> dancers) {
+	InsertionSortDancerName sorter = new InsertionSortDancerName();
+        sorter.sort(dancers);
     }
 
     /**
@@ -135,7 +135,7 @@ public class DansaGUI extends javax.swing.JFrame {
      * and swap to exchange cities when necessary.
      * @param cities
      */
-    public void selectionSort(ArrayList < City > cities) {
+    public void selectionSort(ArrayList < Dancer > cities) {
         SelectionSortPopulation sorter = new SelectionSortPopulation();
         sorter.sort(cities);
     }  
@@ -150,14 +150,14 @@ public class DansaGUI extends javax.swing.JFrame {
      * pre-condition: ArrayList members filled-in with members objects, int i >= 0.
      * post-condition: members ArrayList is sorted by level.
      */
-    public int findMaximum(ArrayList < City > cities, int i)
+    public int findMaximum(ArrayList < Dancer > dancers, int i)
     {
        double max = 0;
        int maxIndex = i;
-       for (int j = i; j < cities.size(); j++) {
-           double pop = cities.get(j).getPopulation();
-           if (pop > max) {
-               max = pop;
+       for (int j = i; j < dancers.size(); j++) {
+           int years = dancers.get(j).getYears();
+           if (years > max) {
+               max = years;
                maxIndex = j;
            }
        }
@@ -175,31 +175,32 @@ public class DansaGUI extends javax.swing.JFrame {
      * pre-condition: ArrayList members filled-in with members objects, int i, j >= 0.
      * post-condition: members ArrayList with two members swapped.
      */
-    public void swap(ArrayList < City > cities, int i, int j)
+    public void swap(ArrayList < Dancer > dancers, int i, int j)
     {
-        City temp = cities.get(j);
-        cities.set(j, cities.get(i));
-        cities.set(i, temp);
+        Dancer temp = dancers.get(j);
+        dancers.set(j, dancers.get(i));
+        dancers.set(i, temp);
     }
 
     // Binary search for city 
 
-    /** showCityData
-     * This method is called from within the constructor to
-     * display the data for the selected city.
+    /** showDancerData
+ This method is called from within the constructor to
+ display the data for the selected city.
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.
      */
-    private void showCityData(int index)
+    private void showDancerData(int index)
     {
         if (index == -1) {
             index = 0;
         }
-        nameJTextField.setText(cities.get(index).getName());
-        popJTextField.setText(String.valueOf(cities.get(index).getPopulation()));
-        medianJTextField.setText("$" + number.format(cities.get(index).getMedian()));
-        percentJTextField.setText(number.format(cities.get(index).getLocal()) + "%");
-        degreeJTextField.setText(number.format(cities.get(index).getDegree()) + "%");
+        nameJTextField.setText(dancers.get(index).getName());
+        styleJTextField.setText(dancers.get(index).getStyle());
+        profJTextField.setText(dancers.get(index).getProf());
+        yearsJTextField.setText(String.valueOf(dancers.get(index).getYears()));
+        phoneJTextField.setText(dancers.get(index).getPhone());
+        emailJTextField.setText(dancers.get(index).getEmail());
     }   
     
     /**
@@ -218,27 +219,27 @@ public class DansaGUI extends javax.swing.JFrame {
         logoJLabel1 = new javax.swing.JLabel();
         listJPanel = new javax.swing.JPanel();
         llistJScrollPane = new javax.swing.JScrollPane();
-        citiesJList = new javax.swing.JList();
+        dancersJList = new javax.swing.JList();
         displayJPanel = new javax.swing.JPanel();
         nameJLabel = new javax.swing.JLabel();
         nameJTextField = new javax.swing.JTextField();
-        popJLabel = new javax.swing.JLabel();
-        popJTextField = new javax.swing.JTextField();
-        medianJLabel = new javax.swing.JLabel();
-        medianJTextField = new javax.swing.JTextField();
-        percentJLabel = new javax.swing.JLabel();
-        percentJTextField = new javax.swing.JTextField();
-        degreetJLabel = new javax.swing.JLabel();
-        degreeJTextField = new javax.swing.JTextField();
-        degreetJLabel1 = new javax.swing.JLabel();
-        degreeJTextField1 = new javax.swing.JTextField();
+        styleJLabel = new javax.swing.JLabel();
+        styleJTextField = new javax.swing.JTextField();
+        profJLabel = new javax.swing.JLabel();
+        profJTextField = new javax.swing.JTextField();
+        yearsJLabel = new javax.swing.JLabel();
+        yearsJTextField = new javax.swing.JTextField();
+        phoneJLabel = new javax.swing.JLabel();
+        phoneJTextField = new javax.swing.JTextField();
+        emailJLabel = new javax.swing.JLabel();
+        emailJTextField = new javax.swing.JTextField();
         controlPanel = new javax.swing.JPanel();
         addJButton = new javax.swing.JButton();
         editJButton = new javax.swing.JButton();
         deleteJButton = new javax.swing.JButton();
         printJButton = new javax.swing.JButton();
         exitJButton = new javax.swing.JButton();
-        citiesJMenuBar = new javax.swing.JMenuBar();
+        dancersJMenuBar = new javax.swing.JMenuBar();
         fileJMenu = new javax.swing.JMenu();
         clearJMenuItem = new javax.swing.JMenuItem();
         printJMenuItem = new javax.swing.JMenuItem();
@@ -259,7 +260,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         logoJLabel.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
         logoJLabel.setForeground(new java.awt.Color(51, 0, 0));
-        logoJLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cafedansadatabase/Bottle_Dancers_USA.jpg"))); // NOI18N
+        logoJLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cafedansadatabase/Bottle_Dancers_USA_small.jpg"))); // NOI18N
 
         titleJLabel.setFont(new java.awt.Font("Tempus Sans ITC", 2, 24)); // NOI18N
         titleJLabel.setForeground(new java.awt.Color(51, 0, 0));
@@ -298,13 +299,13 @@ public class DansaGUI extends javax.swing.JFrame {
 
         getContentPane().add(titleJPanel, java.awt.BorderLayout.NORTH);
 
-        citiesJList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        citiesJList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        dancersJList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        dancersJList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                citiesJListValueChanged(evt);
+                dancersJListValueChanged(evt);
             }
         });
-        llistJScrollPane.setViewportView(citiesJList);
+        llistJScrollPane.setViewportView(dancersJList);
 
         javax.swing.GroupLayout listJPanelLayout = new javax.swing.GroupLayout(listJPanel);
         listJPanel.setLayout(listJPanelLayout);
@@ -326,62 +327,62 @@ public class DansaGUI extends javax.swing.JFrame {
 
         nameJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nameJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        nameJLabel.setText("Name of city: ");
+        nameJLabel.setText("Name of dancer: ");
         displayJPanel.add(nameJLabel);
 
         nameJTextField.setEditable(false);
         nameJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         displayJPanel.add(nameJTextField);
 
-        popJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        popJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        popJLabel.setText("Population (in millions): ");
-        displayJPanel.add(popJLabel);
+        styleJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        styleJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        styleJLabel.setText("Dance Style:");
+        displayJPanel.add(styleJLabel);
 
-        popJTextField.setEditable(false);
-        popJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        popJTextField.setToolTipText("Press Enter to update");
-        displayJPanel.add(popJTextField);
+        styleJTextField.setEditable(false);
+        styleJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        styleJTextField.setToolTipText("Press Enter to update");
+        displayJPanel.add(styleJTextField);
 
-        medianJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        medianJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        medianJLabel.setText("Median income (per household): ");
-        displayJPanel.add(medianJLabel);
+        profJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        profJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        profJLabel.setText("Level of proficiency:");
+        displayJPanel.add(profJLabel);
 
-        medianJTextField.setEditable(false);
-        medianJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        medianJTextField.setToolTipText("Enter with no $ or commas and press Enter to update");
-        displayJPanel.add(medianJTextField);
+        profJTextField.setEditable(false);
+        profJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        profJTextField.setToolTipText("Enter with no $ or commas and press Enter to update");
+        displayJPanel.add(profJTextField);
 
-        percentJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        percentJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        percentJLabel.setText("Percent native to state: ");
-        displayJPanel.add(percentJLabel);
+        yearsJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        yearsJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        yearsJLabel.setText("Years dancing:");
+        displayJPanel.add(yearsJLabel);
 
-        percentJTextField.setEditable(false);
-        percentJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        percentJTextField.setToolTipText("Enter without % sign and pres Enter to update");
-        displayJPanel.add(percentJTextField);
+        yearsJTextField.setEditable(false);
+        yearsJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        yearsJTextField.setToolTipText("Enter without % sign and pres Enter to update");
+        displayJPanel.add(yearsJTextField);
 
-        degreetJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        degreetJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        degreetJLabel.setText("Percent advanced degrees: ");
-        displayJPanel.add(degreetJLabel);
+        phoneJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        phoneJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        phoneJLabel.setText("Phone:");
+        displayJPanel.add(phoneJLabel);
 
-        degreeJTextField.setEditable(false);
-        degreeJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        degreeJTextField.setToolTipText("Enter without % sign and press Enter to update");
-        displayJPanel.add(degreeJTextField);
+        phoneJTextField.setEditable(false);
+        phoneJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        phoneJTextField.setToolTipText("Enter without % sign and press Enter to update");
+        displayJPanel.add(phoneJTextField);
 
-        degreetJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        degreetJLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        degreetJLabel1.setText("Percent advanced degrees: ");
-        displayJPanel.add(degreetJLabel1);
+        emailJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        emailJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        emailJLabel.setText("email:");
+        displayJPanel.add(emailJLabel);
 
-        degreeJTextField1.setEditable(false);
-        degreeJTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        degreeJTextField1.setToolTipText("Enter without % sign and press Enter to update");
-        displayJPanel.add(degreeJTextField1);
+        emailJTextField.setEditable(false);
+        emailJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        emailJTextField.setToolTipText("Enter without % sign and press Enter to update");
+        displayJPanel.add(emailJTextField);
 
         getContentPane().add(displayJPanel, java.awt.BorderLayout.CENTER);
 
@@ -486,11 +487,12 @@ public class DansaGUI extends javax.swing.JFrame {
         });
         fileJMenu.add(exitJMenuItem);
 
-        citiesJMenuBar.add(fileJMenu);
+        dancersJMenuBar.add(fileJMenu);
 
         sortJMenu.setMnemonic('S');
         sortJMenu.setText("Sort");
 
+        menubuttonGroup.add(nameJRadioButtonMenuItem);
         nameJRadioButtonMenuItem.setMnemonic('n');
         nameJRadioButtonMenuItem.setSelected(true);
         nameJRadioButtonMenuItem.setText("By Name");
@@ -502,6 +504,7 @@ public class DansaGUI extends javax.swing.JFrame {
         });
         sortJMenu.add(nameJRadioButtonMenuItem);
 
+        menubuttonGroup.add(popJRadioButtonMenuItem);
         popJRadioButtonMenuItem.setMnemonic('B');
         popJRadioButtonMenuItem.setText("By Population");
         popJRadioButtonMenuItem.setToolTipText("Sort by populatoin a nd display name and population");
@@ -512,13 +515,13 @@ public class DansaGUI extends javax.swing.JFrame {
         });
         sortJMenu.add(popJRadioButtonMenuItem);
 
-        citiesJMenuBar.add(sortJMenu);
+        dancersJMenuBar.add(sortJMenu);
 
         actionJMenu.setMnemonic('t');
         actionJMenu.setText("Action");
 
         addJMenuItem.setMnemonic('A');
-        addJMenuItem.setText("Add New City");
+        addJMenuItem.setText("Add New Dancer");
         addJMenuItem.setToolTipText("Add new city");
         addJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -528,7 +531,7 @@ public class DansaGUI extends javax.swing.JFrame {
         actionJMenu.add(addJMenuItem);
 
         deleteJMenuItem.setMnemonic('D');
-        deleteJMenuItem.setText("Delete City");
+        deleteJMenuItem.setText("Delete Dancer");
         deleteJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteJMenuItemActionPerformed(evt);
@@ -537,7 +540,7 @@ public class DansaGUI extends javax.swing.JFrame {
         actionJMenu.add(deleteJMenuItem);
 
         editJMenuItem.setMnemonic('E');
-        editJMenuItem.setText("Edit City");
+        editJMenuItem.setText("Edit Dancer");
         editJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editJMenuItemActionPerformed(evt);
@@ -546,7 +549,7 @@ public class DansaGUI extends javax.swing.JFrame {
         actionJMenu.add(editJMenuItem);
 
         searchJMenuItem.setMnemonic('r');
-        searchJMenuItem.setText("Search City");
+        searchJMenuItem.setText("Search Dancer");
         searchJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchJMenuItemActionPerformed(evt);
@@ -554,7 +557,7 @@ public class DansaGUI extends javax.swing.JFrame {
         });
         actionJMenu.add(searchJMenuItem);
 
-        citiesJMenuBar.add(actionJMenu);
+        dancersJMenuBar.add(actionJMenu);
 
         helpJMenu.setMnemonic('H');
         helpJMenu.setText("Help");
@@ -568,9 +571,9 @@ public class DansaGUI extends javax.swing.JFrame {
         });
         helpJMenu.add(aboutJMenuItem);
 
-        citiesJMenuBar.add(helpJMenu);
+        dancersJMenuBar.add(helpJMenu);
 
-        setJMenuBar(citiesJMenuBar);
+        setJMenuBar(dancersJMenuBar);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -582,30 +585,30 @@ public class DansaGUI extends javax.swing.JFrame {
     private void clearAll()
     {
         //Clear and set JTextFields visible
-        citiesJList.setEnabled(false);
+        dancersJList.setEnabled(false);
         nameJTextField.setText("");
         nameJTextField.setEditable(true);
-        popJTextField.setText("");
-        popJTextField.setEditable(true);
-        medianJTextField.setText("");
-        medianJTextField.setEditable(true);
-        percentJTextField.setText("");
-        percentJTextField.setEditable(true);
-        degreeJTextField.setText("");
-        degreeJTextField.setEditable(true);
+        styleJTextField.setText("");
+        styleJTextField.setEditable(true);
+        profJTextField.setText("");
+        profJTextField.setEditable(true);
+        yearsJTextField.setText("");
+        yearsJTextField.setEditable(true);
+        phoneJTextField.setText("");
+        phoneJTextField.setEditable(true);
         nameJTextField.requestFocus();
        
     }
         
     
-    private void citiesJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_citiesJListValueChanged
-        int index = (citiesJList.getSelectedIndex());
+    private void dancersJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_dancersJListValueChanged
+        int index = (dancersJList.getSelectedIndex());
         if (index == -1)
         {
             index = 0;
         }
-//        showCityData(index);
-    }//GEN-LAST:event_citiesJListValueChanged
+//        showDancerData(index);
+    }//GEN-LAST:event_dancersJListValueChanged
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
 //        // Add new city
@@ -619,15 +622,15 @@ public class DansaGUI extends javax.swing.JFrame {
 //            // The modal dialog takes focus, upon regaining focus:
 //            City newCity = addCity.getCity();
 //
-//            if (newCity != null && !cityExists(newCity))
+//            if (newCity != null && !dancerExists(newCity))
 //            {
 //                // Add the new city to the database
 //                cities.add(newCity);
-//                displayCities();                  //refresh GUI
-//                searchCity(newCity.getName());    //highlight added city
+//                displayDancers();                  //refresh GUI
+//                searchDancer(newCity.getName());    //highlight added city
 //
 //                //save new city to file
-//                saveCities();
+//                saveDancers();
 //            }
 //            else
 //            {
@@ -673,8 +676,8 @@ public class DansaGUI extends javax.swing.JFrame {
             JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             // Delete selected dancer
-            int index = this.citiesJList.getSelectedIndex();
-            this.cities.remove(index);
+            int index = this.dancersJList.getSelectedIndex();
+            this.dancers.remove(index);
             displayDancers();
             saveDancers();
         } else {
@@ -708,14 +711,14 @@ public class DansaGUI extends javax.swing.JFrame {
 
     private void nameJRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameJRadioButtonMenuItemActionPerformed
         // display cities sorted by name
-        insertionSort(this.cities);
-        displayCities();
+        insertionSort(this.dancers);
+        displayDancers();
     }//GEN-LAST:event_nameJRadioButtonMenuItemActionPerformed
 
     private void popJRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popJRadioButtonMenuItemActionPerformed
         // display cities sorted by population
-        selectionSort(this.cities);
-        displayCities();
+        selectionSort(this.dancers);
+        displayDancers();
     }//GEN-LAST:event_popJRadioButtonMenuItemActionPerformed
 
     private void addJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJMenuItemActionPerformed
@@ -738,37 +741,37 @@ public class DansaGUI extends javax.swing.JFrame {
         String cityName = JOptionPane.showInputDialog(this, "Search for:",
             "Search for City",
             JOptionPane.PLAIN_MESSAGE);
-        searchCity(cityName);
+        searchDancer(cityName);
     }//GEN-LAST:event_searchJMenuItemActionPerformed
 
     private void aboutJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutJMenuItemActionPerformed
-        AboutJFrame cityAbout = new AboutJFrame();
-        cityAbout.setVisible(true);
+//        AboutJFrame cityAbout = new AboutJFrame();
+//        cityAbout.setVisible(true);
 
     }//GEN-LAST:event_aboutJMenuItemActionPerformed
 
         /**
-     * Method: saveCities
-     * Saves the cities to a file in the alphabetical order of their name.
+     * Method: saveDancers
+ Saves the cities to a file in the alphabetical order of their name.
      * @see writeToFile
      * @return void
      */
-    private void saveCities()
+    private void saveDancers()
     {       
         writeToFile(this.fileName);
     }
     
     /**
-     * Method: cityExists
-     * Performs linear search through City list, `this.cities`, 
-     * to determine if the specified City object exists.
+     * Method: dancerExists
+ Performs linear search through City list, `this.cities`, 
+ to determine if the specified City object exists.
      * @param metropolis - City whose existence is in question
      * @return boolean: true if the city exist.
      */
-    private boolean cityExists(City metropolis)
+    private boolean dancerExists(Dancer metropolis)
     {
-        for (int i = 0; i < cities.size(); i++) {
-            if (metropolis.equals(cities.get(i))) {
+        for (int i = 0; i < dancers.size(); i++) {
+            if (metropolis.equals(dancers.get(i))) {
                 return true;
             }
         }
@@ -776,8 +779,8 @@ public class DansaGUI extends javax.swing.JFrame {
     }
 
     /**
-     * Method: searchCity
-     * Searches for a city by how they are currently sorted.
+     * Method: searchDancer
+ Searches for a city by how they are currently sorted.
      * Cities are first sorted by name, and then the index of the
      * desired city is given. If citiesJList is sorted by name, then
      * this index will be highlighted. If citiesJList is sorted by
@@ -789,18 +792,18 @@ public class DansaGUI extends javax.swing.JFrame {
      * @param cityName 
      * @return void
      */
-    private void searchCity(String cityName)
+    private void searchDancer(String cityName)
     {
         if ((cityName != null) && (cityName.length() > 0)) {
             this.nameJRadioButtonMenuItem.doClick();
             cityName = cityName.toLowerCase();
-            String[] cityNames = new String[cities.size()];
-            for (int i = 0; i < cities.size(); i++) {
-                cityNames[i] = cities.get(i).getName().toLowerCase();
+            String[] cityNames = new String[dancers.size()];
+            for (int i = 0; i < dancers.size(); i++) {
+                cityNames[i] = dancers.get(i).getName().toLowerCase();
             }
             int index = linearSearch(cityNames, cityName);    
             if (index != -1) {
-                citiesJList.setSelectedIndex(index);   
+                dancersJList.setSelectedIndex(index);   
             } else {
                 JOptionPane.showMessageDialog(this,
                                               cityName+" not found.",
@@ -832,9 +835,9 @@ public class DansaGUI extends javax.swing.JFrame {
      */
     public static int binarySearch(Comparable[] array, Comparable key)
     {
-        BinarySearchName searcher = new BinarySearchName();
-        int result = searcher.binarySearch(array, key);
-        return result;
+//        BinarySearchName searcher = new BinarySearchName();
+//        int result = searcher.binarySearch(array, key);
+        return -1;
     }
     
      /**
@@ -846,10 +849,10 @@ public class DansaGUI extends javax.swing.JFrame {
      * post-condition: a new text file is created with the current cities
      * in the database
      * @see WriteFile
-     * @see City
+     * @see Dancer
      */
     public void writeToFile(String file) {
-        CityFileWriter writer = new CityFileWriter(file, cities);
+        DancerFileWriter writer = new DancerFileWriter(file, dancers);
         writer.writeTheFile();
     }
     
@@ -894,19 +897,17 @@ public class DansaGUI extends javax.swing.JFrame {
     private javax.swing.JMenu actionJMenu;
     private javax.swing.JButton addJButton;
     private javax.swing.JMenuItem addJMenuItem;
-    private javax.swing.JList citiesJList;
-    private javax.swing.JMenuBar citiesJMenuBar;
     private javax.swing.JMenuItem clearJMenuItem;
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JTextField degreeJTextField;
-    private javax.swing.JTextField degreeJTextField1;
-    private javax.swing.JLabel degreetJLabel;
-    private javax.swing.JLabel degreetJLabel1;
+    private javax.swing.JList dancersJList;
+    private javax.swing.JMenuBar dancersJMenuBar;
     private javax.swing.JButton deleteJButton;
     private javax.swing.JMenuItem deleteJMenuItem;
     private javax.swing.JPanel displayJPanel;
     private javax.swing.JButton editJButton;
     private javax.swing.JMenuItem editJMenuItem;
+    private javax.swing.JLabel emailJLabel;
+    private javax.swing.JTextField emailJTextField;
     private javax.swing.JButton exitJButton;
     private javax.swing.JMenuItem exitJMenuItem;
     private javax.swing.JMenu fileJMenu;
@@ -916,22 +917,24 @@ public class DansaGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane llistJScrollPane;
     private javax.swing.JLabel logoJLabel;
     private javax.swing.JLabel logoJLabel1;
-    private javax.swing.JLabel medianJLabel;
-    private javax.swing.JTextField medianJTextField;
     private javax.swing.ButtonGroup menubuttonGroup;
     private javax.swing.JLabel nameJLabel;
     private javax.swing.JRadioButtonMenuItem nameJRadioButtonMenuItem;
     private javax.swing.JTextField nameJTextField;
-    private javax.swing.JLabel percentJLabel;
-    private javax.swing.JTextField percentJTextField;
-    private javax.swing.JLabel popJLabel;
+    private javax.swing.JLabel phoneJLabel;
+    private javax.swing.JTextField phoneJTextField;
     private javax.swing.JRadioButtonMenuItem popJRadioButtonMenuItem;
-    private javax.swing.JTextField popJTextField;
     private javax.swing.JButton printJButton;
     private javax.swing.JMenuItem printJMenuItem;
+    private javax.swing.JLabel profJLabel;
+    private javax.swing.JTextField profJTextField;
     private javax.swing.JMenuItem searchJMenuItem;
     private javax.swing.JMenu sortJMenu;
+    private javax.swing.JLabel styleJLabel;
+    private javax.swing.JTextField styleJTextField;
     private javax.swing.JLabel titleJLabel;
     private javax.swing.JPanel titleJPanel;
+    private javax.swing.JLabel yearsJLabel;
+    private javax.swing.JTextField yearsJTextField;
     // End of variables declaration//GEN-END:variables
 }

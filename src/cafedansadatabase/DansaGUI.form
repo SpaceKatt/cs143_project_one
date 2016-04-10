@@ -4,7 +4,7 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="menubuttonGroup">
     </Component>
-    <Menu class="javax.swing.JMenuBar" name="citiesJMenuBar">
+    <Menu class="javax.swing.JMenuBar" name="dancersJMenuBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="fileJMenu">
           <Properties>
@@ -53,6 +53,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JRadioButtonMenuItem" name="nameJRadioButtonMenuItem">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="menubuttonGroup"/>
+                </Property>
                 <Property name="mnemonic" type="int" value="110"/>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="By Name"/>
@@ -64,6 +67,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JRadioButtonMenuItem" name="popJRadioButtonMenuItem">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="menubuttonGroup"/>
+                </Property>
                 <Property name="mnemonic" type="int" value="66"/>
                 <Property name="text" type="java.lang.String" value="By Population"/>
                 <Property name="toolTipText" type="java.lang.String" value="Sort by populatoin a nd display name and population"/>
@@ -83,7 +89,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="addJMenuItem">
               <Properties>
                 <Property name="mnemonic" type="int" value="65"/>
-                <Property name="text" type="java.lang.String" value="Add New City"/>
+                <Property name="text" type="java.lang.String" value="Add New Dancer"/>
                 <Property name="toolTipText" type="java.lang.String" value="Add new city"/>
               </Properties>
               <Events>
@@ -93,7 +99,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="deleteJMenuItem">
               <Properties>
                 <Property name="mnemonic" type="int" value="68"/>
-                <Property name="text" type="java.lang.String" value="Delete City"/>
+                <Property name="text" type="java.lang.String" value="Delete Dancer"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteJMenuItemActionPerformed"/>
@@ -102,7 +108,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="editJMenuItem">
               <Properties>
                 <Property name="mnemonic" type="int" value="69"/>
-                <Property name="text" type="java.lang.String" value="Edit City"/>
+                <Property name="text" type="java.lang.String" value="Edit Dancer"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editJMenuItemActionPerformed"/>
@@ -111,7 +117,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="searchJMenuItem">
               <Properties>
                 <Property name="mnemonic" type="int" value="114"/>
-                <Property name="text" type="java.lang.String" value="Search City"/>
+                <Property name="text" type="java.lang.String" value="Search Dancer"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchJMenuItemActionPerformed"/>
@@ -143,7 +149,7 @@
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="menuBar" type="java.lang.String" value="citiesJMenuBar"/>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="dancersJMenuBar"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -212,7 +218,7 @@
               <Color blue="0" green="0" red="33" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/cafedansadatabase/Bottle_Dancers_USA.jpg"/>
+              <Image iconType="3" name="/cafedansadatabase/Bottle_Dancers_USA_small.jpg"/>
             </Property>
           </Properties>
         </Component>
@@ -273,7 +279,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JList" name="citiesJList">
+            <Component class="javax.swing.JList" name="dancersJList">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -283,7 +289,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="citiesJListValueChanged"/>
+                <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="dancersJListValueChanged"/>
               </Events>
             </Component>
           </SubComponents>
@@ -310,7 +316,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="text" type="java.lang.String" value="Name of city: "/>
+            <Property name="text" type="java.lang.String" value="Name of dancer: "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="nameJTextField">
@@ -321,16 +327,16 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="popJLabel">
+        <Component class="javax.swing.JLabel" name="styleJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="text" type="java.lang.String" value="Population (in millions): "/>
+            <Property name="text" type="java.lang.String" value="Dance Style:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="popJTextField">
+        <Component class="javax.swing.JTextField" name="styleJTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -339,16 +345,16 @@
             <Property name="toolTipText" type="java.lang.String" value="Press Enter to update"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="medianJLabel">
+        <Component class="javax.swing.JLabel" name="profJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="text" type="java.lang.String" value="Median income (per household): "/>
+            <Property name="text" type="java.lang.String" value="Level of proficiency:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="medianJTextField">
+        <Component class="javax.swing.JTextField" name="profJTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -357,16 +363,16 @@
             <Property name="toolTipText" type="java.lang.String" value="Enter with no $ or commas and press Enter to update"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="percentJLabel">
+        <Component class="javax.swing.JLabel" name="yearsJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="text" type="java.lang.String" value="Percent native to state: "/>
+            <Property name="text" type="java.lang.String" value="Years dancing:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="percentJTextField">
+        <Component class="javax.swing.JTextField" name="yearsJTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -375,16 +381,16 @@
             <Property name="toolTipText" type="java.lang.String" value="Enter without % sign and pres Enter to update"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="degreetJLabel">
+        <Component class="javax.swing.JLabel" name="phoneJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="text" type="java.lang.String" value="Percent advanced degrees: "/>
+            <Property name="text" type="java.lang.String" value="Phone:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="degreeJTextField">
+        <Component class="javax.swing.JTextField" name="phoneJTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -393,16 +399,16 @@
             <Property name="toolTipText" type="java.lang.String" value="Enter without % sign and press Enter to update"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="degreetJLabel1">
+        <Component class="javax.swing.JLabel" name="emailJLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="text" type="java.lang.String" value="Percent advanced degrees: "/>
+            <Property name="text" type="java.lang.String" value="email:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="degreeJTextField1">
+        <Component class="javax.swing.JTextField" name="emailJTextField">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
