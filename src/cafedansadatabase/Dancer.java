@@ -139,10 +139,7 @@ class Dancer {
     }
 
     public boolean equals(Dancer dancer) {
-        if (this.getName().equalsIgnoreCase(dancer.getName()) &&
-                this.getYears() == dancer.getYears()) {
-            return true;
-        }
-        return false;
+        return this.getName().equalsIgnoreCase(dancer.getName()) &&
+                this.getYears() == dancer.getYears();
     }
 }

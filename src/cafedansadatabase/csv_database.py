@@ -3,11 +3,11 @@
 def grab_style(line):
     """From a line, grab the second value in a comma-separated list"""
     fields = line.split(",")
-    return fields[1]
+    return fields[2]
 
 def format_array(styles):
     """From a list of values, create a valid Java array code"""
-    array = "String[] styles = new String[]{"
+    array = "String[] profs = new String[]{"
     for style in styles:
         array += "\"" + style + "\", "
     array = array[:-2] + "};"

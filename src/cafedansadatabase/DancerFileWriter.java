@@ -51,7 +51,7 @@ class DancerFileWriter {
     
     private ArrayList<String> createLines(ArrayList<Dancer> dancers) {
         ArrayList<Dancer> sortDancer = new ArrayList<>(dancers);
-        InsertionSortDancerName sorter = new InsertionSortDancerName();
+        InsertionSortDancerLastName sorter = new InsertionSortDancerLastName();
         sorter.sort(sortDancer);
         ArrayList<String> newLines = new ArrayList<>();
         for (int i = 0; i < dancers.size(); i++) {

@@ -17,18 +17,19 @@
 
 package cafedansadatabase;
 
+import java.awt.Toolkit;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
- * A class which defines the form by which users may add a city
+ * A class which defines the form by which users may add a dancer
  * to our application.
  * <pre>
-    Project: CitiesGUI Database
+    Project: CafeDansa Database
     Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
-    Course:
-    Hours: 2 hours and 15 minutes
+    Course: CS 143
     Created on Apr 5, 2016, 12:32:49 PM
-    Revised on Arp 7, 2016, 2:30:21 PM
+    Revised on Arp 10, 2016, 2:30:21 PM
  </pre>
  * @author Thomas Kercheval
  */
@@ -40,27 +41,41 @@ public class AddDancer extends javax.swing.JDialog {
     private Dancer newDancer;
     
     /**
-     * Creates new form AddCity
+     * Creates new form AddDancer
      */
     public AddDancer() {
         initComponents();
     }
 
     /**
-     * Constructor which spawns AddCity GUI and sets modality.
-     * @param aThis GUI which spawns AddCity
+     * Constructor which spawns AddDancer GUI and sets modality.
+     * @param aThis GUI which spawns AddDancer
      * @param b boolean value which indicates modality
      */
     AddDancer(DansaGUI aThis, boolean b) {
         this.setModal(b);
         initComponents();
-        String[] styles = new String[]{"baladi", "balkan", "ballet", "ballroom", "bhangra", "irish step dancing", "milonga", "modern pop", "salsa", "samba", "tap"};
+        this.setIconImage(Toolkit.getDefaultToolkit().
+                getImage("src/cafedansadatabase/Bottle_Dancers_USA.jpg"));
+        String[] styles = new String[]{"baladi", "balkan", "ballet", "ballroom", 
+                                       "bhangra", "irish step dancing", 
+                                       "milonga", "modern pop", "salsa", 
+                                       "samba", "tap"};
+        String[] profs = new String[]{"beginner", "intermediate", "advanced", 
+                                      "expert", "master", "guru"};
+        Integer[] yearOptions = new Integer[100];
+        for (int i = 0; i < yearOptions.length; i++) {
+            yearOptions[i] = i;
+        }
+        styleJComboBox.setModel(new DefaultComboBoxModel(styles));
+        profJComboBox.setModel(new DefaultComboBoxModel(profs));
+        yearsJComboBox.setModel(new DefaultComboBoxModel(yearOptions));
     }
 
     /**
      * Method: getDancer
-     * Returns the new city object
-     * @return City: the new city to be added.
+     * Returns the new dancer object
+     * @return Dancer: the new dancer to be added.
      */
     Dancer getDancer() {
         return newDancer;
@@ -89,7 +104,7 @@ public class AddDancer extends javax.swing.JDialog {
         profJLabel = new javax.swing.JLabel();
         profJComboBox = new javax.swing.JComboBox<>();
         yearsJLabel = new javax.swing.JLabel();
-        yearsJTextField = new javax.swing.JTextField();
+        yearsJComboBox = new javax.swing.JComboBox<>();
         phoneJLabel = new javax.swing.JLabel();
         phoneJTextField = new javax.swing.JTextField();
         emailJLabel = new javax.swing.JLabel();
@@ -192,9 +207,8 @@ public class AddDancer extends javax.swing.JDialog {
         yearsJLabel.setText("Years dancing:");
         displayJPanel.add(yearsJLabel);
 
-        yearsJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        yearsJTextField.setToolTipText("Enter without % sign and pres Enter to update");
-        displayJPanel.add(yearsJTextField);
+        yearsJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        displayJPanel.add(yearsJComboBox);
 
         phoneJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         phoneJLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -220,7 +234,7 @@ public class AddDancer extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Event handler for saving the new city from text field input.
+     * Event handler for saving the new dancer from text field input.
      * Validates input before saving and closing the pop-up window.
      * @param evt 
      * @return void
@@ -228,16 +242,15 @@ public class AddDancer extends javax.swing.JDialog {
     private void saveJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveJButtonActionPerformed
         String name = nameJTextField.getText();
         String prof = (String) profJComboBox.getSelectedItem();
-        String years = yearsJTextField.getText();
+        int years = (int) yearsJComboBox.getSelectedItem();
         String phone = phoneJTextField.getText();
         String style = (String) styleJComboBox.getSelectedItem();
         String email = emailJTextField.getText();
-        boolean condition = !(name.equals("") && prof.equals("") &&
-                            style.equals("") && phone.equals("") &&
-                            years.equals("")) && email.equals("");
+        boolean condition = !(name.equals("") || prof.equals("") ||
+                            style.equals("") || phone.equals("") || 
+                            email.equals(""));
         if (condition) {
             try {
-                int yearsNum = Integer.parseInt(years);
                 newDancer = new Dancer(name, style, prof, years, phone, email);
                 this.setVisible(false);
             } catch (NumberFormatException e) {
@@ -255,7 +268,7 @@ public class AddDancer extends javax.swing.JDialog {
     }//GEN-LAST:event_saveJButtonActionPerformed
 
     /**
-     * Event handler for the cancellation of new City creation.
+     * Event handler for the cancellation of new Dancer creation.
      * @param evt 
      * @return void
      */
@@ -266,7 +279,7 @@ public class AddDancer extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelJButtonActionPerformed
 
     /**
-     * Spawns AddCity form.
+     * Spawns AddDancer form.
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -320,8 +333,8 @@ public class AddDancer extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> styleJComboBox;
     private javax.swing.JLabel styleJLabel;
     private javax.swing.JPanel titlePanel;
+    private javax.swing.JComboBox<String> yearsJComboBox;
     private javax.swing.JLabel yearsJLabel;
-    private javax.swing.JTextField yearsJTextField;
     // End of variables declaration//GEN-END:variables
 
 }

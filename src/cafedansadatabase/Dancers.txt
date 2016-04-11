@@ -1,14 +1,14 @@
-Anna Pavlova,ballet,expert,32,425-125-9874,ana.pavlova@dance.com
-Vaslav Nijinsky,ballet,master,40,206-675-1280,nijinsky@ballet.net
 Fred Astaire,ballroom,master,36,310-387-4499,astaire@ballet.net
-Sammy Davis,tap,expert,27,909-123-6578,davis@pop.com
-Gene Kelly,ballroom,beginner,12,707-945-7765,kelly@ballroom.com
 Mikhail Baryshnikov,ballet,intermediate,28,707-945-7765,baryshnikov@ballet.com
-Michael Jackson,modern pop,advanced,9,303-313-5455,michael@pop.com
-Luara como Lino,samba,advanced,18,452-257-6733,nijinsky@ballet.com
-Magan Gopal,salsa,intemediate,6,206-675-1280,gopal@salsa.com
-Sukshinder Shinda,bhangra,beginner,2,661-038-9512,sshinda@bhangra.com
-Michael Ryan Flatley,irish step dancing,intemediate,30,254-113-6457,flastley@irish.com
-Rags Sharqi,baladi,advanced,14,684-031-3210,rags.sharqi@baladi.com
-Cherie Magnus,milonga,beginner,5,206-675-1280,magus@milonga.com
 Kahte Culevski,balkan,advanced,8,321-741-3771,kculevski@balkanbeat.net
+Sammy Davis,tap,expert,27,909-123-6578,davis@pop.com
+Michael Ryan Flatley,irish step dancing,intemediate,30,254-113-6457,flastley@irish.com
+Magan Gopal,salsa,intemediate,6,206-675-1280,gopal@salsa.com
+Michael Jackson,modern pop,advanced,9,303-313-5455,michael@pop.com
+Gene Kelly,ballroom,beginner,12,707-945-7765,kelly@ballroom.com
+Luara como Lino,samba,advanced,18,452-257-6733,nijinsky@ballet.com
+Cherie Magnus,milonga,beginner,5,206-675-1280,magus@milonga.com
+Vaslav Nijinsky,ballet,master,40,206-675-1280,nijinsky@ballet.net
+Anna Pavlova,ballet,expert,32,425-125-9874,ana.pavlova@dance.com
+Rags Sharqi,baladi,advanced,14,684-031-3210,rags.sharqi@baladi.com
+Sukshinder Shinda,bhangra,beginner,2,661-038-9512,sshinda@bhangra.com

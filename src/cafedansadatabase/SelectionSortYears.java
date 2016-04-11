@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Thomas
+ * Copyright (C) 2016 Thomas Kercheval
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,17 +19,19 @@ package cafedansadatabase;
 import java.util.ArrayList;
 
 /**
- * This class implements a simple insertion sort,
- *     to sort cities by name.
+ * SelectionSortYears.java
+ 
+ Implements a simple selection sort.
  * @author Thomas
  */
-public class InsertionSortDancerName {
-    /* Compares two values. */
+public class SelectionSortYears {
+    
+    /** Compares two values. */
     private boolean less(Dancer one, Dancer two) {
-        return one.getName().compareToIgnoreCase(two.getName()) < 0;
+        return one.getYears() < two.getYears();
     }
     
-    /* Checks to make sure the ArrayList is sorted. */ 
+    /** Checks to make sure the ArrayList is sorted. */ 
     private boolean isSorted(ArrayList<Dancer> list) {
         for (int i = 0; i < list.size(); i++) {
             if(less(list.get(i), list.get(i - 1))) { return false; }
@@ -37,19 +39,22 @@ public class InsertionSortDancerName {
         return true;
     }
     
-    /* Swaps two elements in an ArrayList. */
+    /** Swaps two elements in an ArrayList. */
     private void swap(ArrayList list, int indexOne, int indexTwo) {
         Object temp = list.get(indexTwo);
         list.set(indexTwo, list.get(indexOne));
         list.set(indexOne, temp);
     }
     
-    /* Uses  insertion sort to sort an ArrayList of Cities by name. */
+    /** Uses  insertion sort to sort an ArrayList of Cities by population. */
     public void sort(ArrayList<Dancer> list) {
         int arraySize = list.size();
         for (int i = 0; i < arraySize; i++) {
-            for (int j = i; j > 0 && less(list.get(j), list.get(j-1)); j--) {
-                swap(list, j, j-1);
+            int min = i;
+            for (int j = 0; j < arraySize; j++) {
+                if (less(list.get(j), list.get(min))) {
+                    swap(list, min, j);
+                }
             }
         }
         assert isSorted(list);

@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 thomas.kercheval
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package cafedansadatabase;
 
@@ -18,19 +29,19 @@ import javax.swing.JOptionPane;
 public class DansaGUI extends javax.swing.JFrame {
     
     /** 
-     * Class instance ArrayList of City objects.
+     * Class instance ArrayList of Dancer objects.
      */
     private ArrayList<Dancer> dancers = new ArrayList<>();
         
     /**
-     * External file name of cities.
+     * External file name of dancers.
      */
     private final String fileName = "src/cafedansadatabase/Dancers.txt";
-    
-    /**
-     * Format for displaying numbers relating to City objects.
-     */
-    DecimalFormat number = new DecimalFormat("#,##0");
+//    
+//    /**
+//     * Format for displaying numbers relating to Dancer objects.
+//     */
+//    DecimalFormat number = new DecimalFormat("#,##0");
     /**
      * Creates new form DansaGUI
      */
@@ -38,15 +49,15 @@ public class DansaGUI extends javax.swing.JFrame {
         initComponents();
         this.getRootPane().setDefaultButton(addJButton); //set buttonAdd as default
         this.setIconImage(Toolkit.getDefaultToolkit().
-                getImage("src/USACities/buckinghamfountain_small.jpg"));
+                getImage("src/cafedansadatabase/Bottle_Dancers_USA.jpg"));
         //centers the form at start.
         setLocationRelativeTo(null);
         
-        // Read form an external file Citystats.txt and create an
-        // ArrayList of City type, cities        
+        // Read form an external file Dancers.txt and create an
+        // ArrayList of Dancer type, dancers        
         readFromFile(fileName);
         
-        // Show the city names in the JList
+        // Show the Dancer names in the JList
         displayDancers();
         showDancerData(dancersJList.getSelectedIndex());
     }
@@ -54,16 +65,17 @@ public class DansaGUI extends javax.swing.JFrame {
      /**
      * Method: readFromFile
      * Reads cities from a text file that is comma delimited and
-     * creates an instance of the City class with the data read.
-     * Then the newly created city is added to the cities database.
+     * creates an instance of the Dancer class with the data read.
+     * Then the newly created Dancer is added to the cities database.
      * Uses an object from the ReadFile class to read record.
      * @parem file: String
      * @return void
-     * pre-condition: a valid file name, Citystats.txt is expected
+     * pre-condition: a valid file name, Dancers.txt is expected
      * for input with comma separated text fields (but no spaces) for
-     * city name, population, median, local, and degree
-     * post-condition: a new City is created with the read fields
-     * and added to the ArrayList cities
+     * dancer name, dance style, proficiency, years of experience, 
+     * phone number, and email.
+     * post-condition: a new Dancer is created with the read fields
+     * and added to the ArrayList dancers
      * @see ReadFile
      * @see Member
      */
@@ -82,12 +94,12 @@ public class DansaGUI extends javax.swing.JFrame {
     
     /**
      * Method: displayDancers()
-     * Displays cities in JList sorted by level = 0 using selection sort
+     * Displays dancers in JList sorted by level = 0 using selection sort
      * algorithm or last name = 1 using the insertion sort algorithm.
      * @parem void
      * @return void
-     * pre-condition: Uses the ArrayList cities.
-     * post-condition: cities ArrayList is sorted and displayed either by
+     * pre-condition: Uses the ArrayList dancers.
+     * post-condition: dancers ArrayList is sorted and displayed either by
      * level or last name.
      * @see #selectionSort
      * @see #insetionSort
@@ -95,20 +107,25 @@ public class DansaGUI extends javax.swing.JFrame {
     private void displayDancers()
     {
         int location = dancersJList.getSelectedIndex();
-        String[] cityNames = new String[dancers.size()];
-        if (popJRadioButtonMenuItem.isSelected()) {
+        String[] dancerNames = new String[dancers.size()];
+        if (yearJRadioButtonMenuItem.isSelected()) {
             selectionSort(dancers);
             for (int i = 0; i < dancers.size(); i++) {
-                cityNames[i] = dancers.get(i).getName() + ", " +
+                dancerNames[i] = dancers.get(i).getName() + ", " +
                                dancers.get(i).getYears() + " years.";
+            }
+        } else if (firstNameJRadioButtonMenuItem.isSelected()) {
+            insertionSortFirst(dancers);
+            for (int i = 0; i < dancers.size(); i++) {
+                dancerNames[i] = dancers.get(i).getName();
             }
         } else {
             insertionSort(dancers);
             for (int i = 0; i < dancers.size(); i++) {
-                cityNames[i] = dancers.get(i).getName();
+                dancerNames[i] = dancers.get(i).getName();
             }
         }
-        dancersJList.setListData(cityNames);
+        dancersJList.setListData(dancerNames);
         if (location != -1 && location < dancers.size()) {
             dancersJList.setSelectedIndex(location);
         } else {
@@ -118,33 +135,45 @@ public class DansaGUI extends javax.swing.JFrame {
 
     /**
      * Method: insertionSort
-     * Sorts ArrayList dancers in ascending order by name. Uses the insertion
+     * Sorts ArrayList dancers in ascending order by last name. Uses the insertion
      * sort algorithm which inserts city at correct position and shuffles
      * everyone else below that position.
      * @param dancers
      */
     public static void insertionSort(ArrayList <Dancer> dancers) {
-	InsertionSortDancerName sorter = new InsertionSortDancerName();
+	InsertionSortDancerLastName sorter = new InsertionSortDancerLastName();
         sorter.sort(dancers);
     }
 
     /**
-     * Method: selectionSort
-     * Sorts ArrayList cities in descending order by population. Calls
-     * findsMaximum to find city with maximum population in each pass
-     * and swap to exchange cities when necessary.
-     * @param cities
+     * Method: insertionSortFirst
+     * Sorts ArrayList dancers in ascending order by first name. Uses the insertion
+     * sort algorithm which inserts dancer at correct position and shuffles
+     * everyone else below that position.
+     * @param dancers
      */
-    public void selectionSort(ArrayList < Dancer > cities) {
-        SelectionSortPopulation sorter = new SelectionSortPopulation();
-        sorter.sort(cities);
+    public static void insertionSortFirst(ArrayList <Dancer> dancers) {
+	InsertionSortDancerFirst sorter = new InsertionSortDancerFirst();
+        sorter.sort(dancers);
+    }    
+    
+    /**
+     * Method: selectionSort
+     * Sorts ArrayList dancers in descending order by population. Calls
+     * findsMaximum to find city with maximum population in each pass
+     * and swap to exchange dancers when necessary.
+     * @param dancers
+     */
+    public void selectionSort(ArrayList < Dancer > dancers) {
+        SelectionSortYears sorter = new SelectionSortYears();
+        sorter.sort(dancers);
     }  
 
     /**
      * Method: findMaximum
      * Called by selectionSort to find the index of the member with the maximum
-     * population from a given index to the end of the ArrayList
-     * @parem ArrayList: cities
+     * years of experience from a given index to the end of the ArrayList
+     * @parem ArrayList: dancers
      * @parem  int i: index from which to search for the max >= 0
      * @return int: position or index  where maximum is located
      * pre-condition: ArrayList members filled-in with members objects, int i >= 0.
@@ -247,7 +276,8 @@ public class DansaGUI extends javax.swing.JFrame {
         exitJMenuItem = new javax.swing.JMenuItem();
         sortJMenu = new javax.swing.JMenu();
         nameJRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
-        popJRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        firstNameJRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
+        yearJRadioButtonMenuItem = new javax.swing.JRadioButtonMenuItem();
         actionJMenu = new javax.swing.JMenu();
         addJMenuItem = new javax.swing.JMenuItem();
         deleteJMenuItem = new javax.swing.JMenuItem();
@@ -257,6 +287,7 @@ public class DansaGUI extends javax.swing.JFrame {
         aboutJMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cafe Dansa Database");
 
         logoJLabel.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
         logoJLabel.setForeground(new java.awt.Color(51, 0, 0));
@@ -495,8 +526,8 @@ public class DansaGUI extends javax.swing.JFrame {
         menubuttonGroup.add(nameJRadioButtonMenuItem);
         nameJRadioButtonMenuItem.setMnemonic('n');
         nameJRadioButtonMenuItem.setSelected(true);
-        nameJRadioButtonMenuItem.setText("By Name");
-        nameJRadioButtonMenuItem.setToolTipText("Sort by name and display only name");
+        nameJRadioButtonMenuItem.setText("By Last Name");
+        nameJRadioButtonMenuItem.setToolTipText("Sort by last name and display only name");
         nameJRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameJRadioButtonMenuItemActionPerformed(evt);
@@ -504,16 +535,28 @@ public class DansaGUI extends javax.swing.JFrame {
         });
         sortJMenu.add(nameJRadioButtonMenuItem);
 
-        menubuttonGroup.add(popJRadioButtonMenuItem);
-        popJRadioButtonMenuItem.setMnemonic('B');
-        popJRadioButtonMenuItem.setText("By Population");
-        popJRadioButtonMenuItem.setToolTipText("Sort by populatoin a nd display name and population");
-        popJRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        menubuttonGroup.add(firstNameJRadioButtonMenuItem);
+        firstNameJRadioButtonMenuItem.setMnemonic('f');
+        firstNameJRadioButtonMenuItem.setText("By First Name");
+        firstNameJRadioButtonMenuItem.setToolTipText("Sort by first name and display only name");
+        firstNameJRadioButtonMenuItem.setRequestFocusEnabled(false);
+        firstNameJRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                popJRadioButtonMenuItemActionPerformed(evt);
+                firstNameJRadioButtonMenuItemActionPerformed(evt);
             }
         });
-        sortJMenu.add(popJRadioButtonMenuItem);
+        sortJMenu.add(firstNameJRadioButtonMenuItem);
+
+        menubuttonGroup.add(yearJRadioButtonMenuItem);
+        yearJRadioButtonMenuItem.setMnemonic('B');
+        yearJRadioButtonMenuItem.setText("By Years");
+        yearJRadioButtonMenuItem.setToolTipText("Sort by populatoin a nd display name and population");
+        yearJRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yearJRadioButtonMenuItemActionPerformed(evt);
+            }
+        });
+        sortJMenu.add(yearJRadioButtonMenuItem);
 
         dancersJMenuBar.add(sortJMenu);
 
@@ -624,12 +667,12 @@ public class DansaGUI extends javax.swing.JFrame {
 
             if (newDancer != null && !dancerExists(newDancer))
             {
-                // Add the new city to the database
+                // Add the new dancer to the database
                 dancers.add(newDancer);
                 displayDancers();                  //refresh GUI
-                searchDancer(newDancer.getName());    //highlight added city
+                searchDancer(newDancer.getName());    //highlight added dancer
 
-                //save new city to file
+                //save new dancer to file
                 saveDancers();
             }
             else
@@ -710,16 +753,16 @@ public class DansaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitJMenuItemActionPerformed
 
     private void nameJRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameJRadioButtonMenuItemActionPerformed
-        // display cities sorted by name
+        // display dancers sorted by last name
         insertionSort(this.dancers);
         displayDancers();
     }//GEN-LAST:event_nameJRadioButtonMenuItemActionPerformed
 
-    private void popJRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popJRadioButtonMenuItemActionPerformed
-        // display cities sorted by population
+    private void yearJRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearJRadioButtonMenuItemActionPerformed
+        // display dancers sorted by years of experience
         selectionSort(this.dancers);
         displayDancers();
-    }//GEN-LAST:event_popJRadioButtonMenuItemActionPerformed
+    }//GEN-LAST:event_yearJRadioButtonMenuItemActionPerformed
 
     private void addJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJMenuItemActionPerformed
         // call buttonAddActionPerformed
@@ -737,22 +780,27 @@ public class DansaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_editJMenuItemActionPerformed
 
     private void searchJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchJMenuItemActionPerformed
-        // Find specified city
-        String cityName = JOptionPane.showInputDialog(this, "Search for:",
-            "Search for City",
+        // Find specified dancer
+        String dancerName = JOptionPane.showInputDialog(this, "Search for:",
+            "Search for Dancer",
             JOptionPane.PLAIN_MESSAGE);
-        searchDancer(cityName);
+        searchDancer(dancerName);
     }//GEN-LAST:event_searchJMenuItemActionPerformed
 
     private void aboutJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutJMenuItemActionPerformed
-//        AboutJFrame cityAbout = new AboutJFrame();
-//        cityAbout.setVisible(true);
+        AboutJFrame dancerAbout = new AboutJFrame();
+        dancerAbout.setVisible(true);
 
     }//GEN-LAST:event_aboutJMenuItemActionPerformed
 
-        /**
+    private void firstNameJRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameJRadioButtonMenuItemActionPerformed
+        insertionSortFirst(this.dancers);
+        displayDancers();
+    }//GEN-LAST:event_firstNameJRadioButtonMenuItemActionPerformed
+
+    /**
      * Method: saveDancers
- Saves the cities to a file in the alphabetical order of their name.
+     * Saves the dancers to a file in the alphabetical order of their last name.
      * @see writeToFile
      * @return void
      */
@@ -763,15 +811,15 @@ public class DansaGUI extends javax.swing.JFrame {
     
     /**
      * Method: dancerExists
- Performs linear search through City list, `this.cities`, 
- to determine if the specified City object exists.
-     * @param metropolis - City whose existence is in question
+     * Performs linear search through Dancer list, `this.dancers`, 
+     * to determine if the specified Dancer object exists.
+     * @param dancario - City whose existence is in question
      * @return boolean: true if the city exist.
      */
-    private boolean dancerExists(Dancer metropolis)
+    private boolean dancerExists(Dancer dancario)
     {
         for (int i = 0; i < dancers.size(); i++) {
-            if (metropolis.equals(dancers.get(i))) {
+            if (dancario.equals(dancers.get(i))) {
                 return true;
             }
         }
@@ -780,33 +828,27 @@ public class DansaGUI extends javax.swing.JFrame {
 
     /**
      * Method: searchDancer
- Searches for a city by how they are currently sorted.
-     * Cities are first sorted by name, and then the index of the
-     * desired city is given. If citiesJList is sorted by name, then
-     * this index will be highlighted. If citiesJList is sorted by
-     * population then the population of the desired city is grabbed
-     * and then the cities are sorted by population and an array is 
-     * created which holds the population of each city. This population
-     * array is then searched and the index from this search is then
-     * highlighted in citiesJList.
-     * @param cityName 
+     * Searches for a Dancer by how they are currently sorted.
+     * Dancer are first sorted by last name, and then the index of the
+     * desired dancer is given.
+     * @param dancerName 
      * @return void
      */
-    private void searchDancer(String cityName)
+    private void searchDancer(String dancerName)
     {
-        if ((cityName != null) && (cityName.length() > 0)) {
+        if ((dancerName != null) && (dancerName.length() > 0)) {
             this.nameJRadioButtonMenuItem.doClick();
-            cityName = cityName.toLowerCase();
-            String[] cityNames = new String[dancers.size()];
+            dancerName = dancerName.toLowerCase();
+            String[] dancerNames = new String[dancers.size()];
             for (int i = 0; i < dancers.size(); i++) {
-                cityNames[i] = dancers.get(i).getName().toLowerCase();
+                dancerNames[i] = dancers.get(i).getName().toLowerCase();
             }
-            int index = linearSearch(cityNames, cityName);    
+            int index = linearSearch(dancerNames, dancerName);    
             if (index != -1) {
                 dancersJList.setSelectedIndex(index);   
             } else {
                 JOptionPane.showMessageDialog(this,
-                                              cityName+" not found.",
+                                              dancerName+" not found.",
                                               "Search Error",
                                               JOptionPane.ERROR_MESSAGE);
             }
@@ -845,8 +887,8 @@ public class DansaGUI extends javax.swing.JFrame {
      * Write cities to a text file that is comma delimited.
      * @parem file: String
      * @return void
-     * pre-condition: a valid file name, Citystats.txt is expected
-     * post-condition: a new text file is created with the current cities
+     * pre-condition: a valid file name, Dancers.txt is expected
+     * post-condition: a new text file is created with the current dancers
      * in the database
      * @see WriteFile
      * @see Dancer
@@ -912,6 +954,7 @@ public class DansaGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitJMenuItem;
     private javax.swing.JMenu fileJMenu;
     private javax.swing.JPopupMenu.Separator fileJSeparator;
+    private javax.swing.JRadioButtonMenuItem firstNameJRadioButtonMenuItem;
     private javax.swing.JMenu helpJMenu;
     private javax.swing.JPanel listJPanel;
     private javax.swing.JScrollPane llistJScrollPane;
@@ -923,7 +966,6 @@ public class DansaGUI extends javax.swing.JFrame {
     private javax.swing.JTextField nameJTextField;
     private javax.swing.JLabel phoneJLabel;
     private javax.swing.JTextField phoneJTextField;
-    private javax.swing.JRadioButtonMenuItem popJRadioButtonMenuItem;
     private javax.swing.JButton printJButton;
     private javax.swing.JMenuItem printJMenuItem;
     private javax.swing.JLabel profJLabel;
@@ -934,6 +976,7 @@ public class DansaGUI extends javax.swing.JFrame {
     private javax.swing.JTextField styleJTextField;
     private javax.swing.JLabel titleJLabel;
     private javax.swing.JPanel titleJPanel;
+    private javax.swing.JRadioButtonMenuItem yearJRadioButtonMenuItem;
     private javax.swing.JLabel yearsJLabel;
     private javax.swing.JTextField yearsJTextField;
     // End of variables declaration//GEN-END:variables
