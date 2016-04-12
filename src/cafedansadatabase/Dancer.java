@@ -22,16 +22,68 @@ package cafedansadatabase;
  * @author thomas.kercheval
  */
 class Dancer {
-    
-    //
+
+    /**
+     * Name of the Dancer.
+     */
     private String dancerName;
+    /**
+     * Dance style of the Dancer.
+     */
     private String style;
+    /**
+     * Proficiency of the Dancer.
+     */
     private String prof;
+    /**
+     * Number of years the Dancer has been practicing.
+     */
     private int years;
+    /**
+     * Phone number of the Dancer.
+     */
     private String phone;
+    /**
+     * Email of the Dancer.
+     */
     private String email;
-    
-    // Default constructor
+
+    /**
+     * The index in an array passed to the Array constructor
+     * of the Dancer's name.
+     */
+    public static final int NAME_INDEX = 0;
+    /**
+     * The index in an array passed to the Array constructor
+     * of the Dancer's Dance Style.
+     */
+    public static final int STYLE_INDEX = 1;
+    /**
+     * The index in an array passed to the Array constructor
+     * of the Dancer's Proficiency.
+     */
+    public static final int PROF_INDEX = 2;
+    /**
+     * The index in an array passed to the Array constructor
+     * of the numer of Years the dancer has been practicing.
+     */
+    public static final int YEARS_INDEX = 3;
+    /**
+     * The index in an array passed to the Array constructor
+     * of the Dancer's Phone Number.
+     */
+    public static final int PHONE_INDEX = 4;
+    /**
+     * The index in an array passed to the Array constructor
+     * of the Dancer's Email Address.
+     */
+    public static final int EMAIL_INDEX = 5;
+
+
+
+    /**
+     * Default constructor, sets everything to the default value.
+     */
     Dancer() {
         this.dancerName = "";
         this.style = "";
@@ -40,106 +92,190 @@ class Dancer {
         this.phone = "";
         this.email = "";
     }
-    
-    // Overloaded constructor
-    Dancer(String name, String style, String proficiency,
-         int years, String phone, String email) {
+
+    /**
+     * Overloaded constructor, takes all Strings other than int for yearsExp.
+     * @param name The name of our Dancer.
+     * @param styleDance Style of dance of our Dancer.
+     * @param proficiency Level of proficiency of our Dancer.
+     * @param yearsExp Years our Dancer has been practicing.
+     * @param phoneNum Phone number of our Dancer.
+     * @param emailAdd Email address of our Dancer.
+     */
+    Dancer(final String name, final String styleDance, final String proficiency,
+           final int yearsExp, final String phoneNum, final String emailAdd) {
         this.dancerName = name;
-        this.style = style;
+        this.style = styleDance;
         this.prof = proficiency;
-        this.years = years;
-        this.phone = phone;
-        this.email = email;
+        this.years = yearsExp;
+        this.phone = phoneNum;
+        this.email = emailAdd;
     }
 
-    // Overloaded constructor
-    Dancer(String name, String style, String proficiency,
-         String years, String phone, String email) {
+    /**
+     * Overloaded constructor, takes all Strings.
+     * @param name The name of our Dancer.
+     * @param danceStyle Style of dance of our Dancer.
+     * @param proficiency Level of proficiency of our Dancer.
+     * @param yearsExp Years our Dancer has been practicing.
+     * @param phoneNum Phone number of our Dancer.
+     * @param emailAdd Email address of our Dancer.
+     */
+    Dancer(final String name, final String danceStyle, final String proficiency,
+          final String yearsExp, final String phoneNum, final String emailAdd) {
         this.dancerName = name;
-        this.style = style;
+        this.style = danceStyle;
         this.prof = proficiency;
-        this.years = Integer.parseInt(years);
-        this.phone = phone;
-        this.email = email;
+        this.years = Integer.parseInt(yearsExp);
+        this.phone = phoneNum;
+        this.email = emailAdd;
     }
-    
-    // Array constructor
-    Dancer(String[] dancerInfo) {
-        this.dancerName = dancerInfo[0];
-        this.style = dancerInfo[1];
-        this.prof = dancerInfo[2];
-        this.years = Integer.parseInt(dancerInfo[3]);
-        this.phone = dancerInfo[4];
-        this.email = dancerInfo[5];
+
+    /**
+     * Array constructor, takes an array of values as an input.
+     * @param dancerInfo Array containing our Dancer's info. (ordered)
+     */
+    Dancer(final String[] dancerInfo) {
+        this.dancerName = dancerInfo[NAME_INDEX];
+        this.style = dancerInfo[STYLE_INDEX];
+        this.prof = dancerInfo[PROF_INDEX];
+        this.years = Integer.parseInt(dancerInfo[YEARS_INDEX]);
+        this.phone = dancerInfo[PHONE_INDEX];
+        this.email = dancerInfo[EMAIL_INDEX];
     }
-    
-    // Copy constructor
-    Dancer(Dancer dancer) {
+
+    /**
+     * Copy constructor, copies another Dancer object.
+     * @param dancer Other dancer being compared to this.
+     */
+    Dancer(final Dancer dancer) {
         this.dancerName = dancer.dancerName;
         this.style = dancer.style;
         this.prof = dancer.prof;
         this.years = dancer.years;
         this.phone = dancer.phone;
     }
-
+//CHECKSTYLE:OFF
+    /**
+     * Returns the Dancer's name.
+     * @return The name of the Dancer.
+     */
     public String getName() {
         return dancerName;
     }
 
-    public void setDancerName(String dancerName) {
+    /**
+     *
+     * @param dancerName The name of the Dancer.
+     */
+    public void setDancerName(final String dancerName) {
         this.dancerName = dancerName;
     }
 
+    /**
+     *
+     * @return The Style of Dance chosen by the Dancer.
+     */
     public String getStyle() {
         return style;
     }
 
-    public void setStyle(String style) {
+    /**
+     *
+     * @param style The Style of Dance chosen by the Dancer.
+     */
+    public void setStyle(final String style) {
         this.style = style;
     }
 
+    /**
+     *
+     * @return Level of proficiency of the Dancer.
+     */
     public String getProf() {
         return prof;
     }
 
-    public void setProf(String prof) {
+    /**
+     *
+     * @param prof Level of proficiency of the Dancer.
+     */
+    public void setProf(final String prof) {
         this.prof = prof;
     }
 
+    /**
+     *
+     * @return Number of years the Dancer has been practicing.
+     */
     public int getYears() {
         return years;
     }
 
-    public void setYears(int years) {
+    /**
+     *
+     * @param years Number of years the Dancer has been practicing.
+     */
+    public void setYears(final int years) {
         this.years = years;
     }
 
+    /**
+     *
+     * @return The Dancer's Phone Number.
+     */
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    /**
+     *
+     * @param phone The Dancer's Phone Number.
+     */
+    public void setPhone(final String phone) {
         this.phone = phone;
     }
 
+    /**
+     *
+     * @return The Dancer's Email Address.
+     */
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    /**
+     *
+     * @param email The Dancer's Email Address.
+     */
+    public void setEmail(final String email) {
         this.email = email;
     }
-    
+//CHECKSTYLE:ON
 
     @Override
+    /**
+     *
+     * @return String A String representation of our Dancer.
+     */
     public String toString() {
-        return "Dancer{" + "dancerName=" + dancerName + ", style=" + 
-                style + ", proficiency=" + prof + ", years=" + years + 
-                ", phone=" + phone + ", email=" + email + '}';
+        return "Dancer{" + "dancerName=" + dancerName + ", style="
+                + style + ", proficiency=" + prof + ", years=" + years
+                + ", phone=" + phone + ", email=" + email + '}';
     }
 
-    public boolean equals(Dancer dancer) {
-        return this.getName().equalsIgnoreCase(dancer.getName()) &&
-                this.getYears() == dancer.getYears();
+    /**
+     *
+     * @param dancer Other Dancer we are comparing this Dancer to.
+     * @return true if the dancers are equal.
+     */
+    public boolean equals(final Dancer dancer) {
+        return this.getName().equalsIgnoreCase(dancer.getName())
+               && this.getYears() == dancer.getYears();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.dancerName.hashCode();
     }
 }
