@@ -22,16 +22,30 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
+ * DansaGUI.java
+ A class representing the GUI used in a maintaining a dancers database.
+ * <pre>
+    Project: Cafe Dansa Database
+    Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
+    Course:
+    Hours: 5 Hours and 35 Min
+    Created on Apr 9, 2016, 1:45:39 PM
+    Revised on Apr 12, 2016, 02:36:45 PM
+ </pre>
  *
- * @author Thomas
+ * @author:	thomas.kercheval@go.shoreline.edu
+ * @version: 	%1% %2%
+ * @see:     	javax.swing
+ * @see:        java.awt.Toolkit
+ * @see         java.util.ArrayList
  */
 public class DansaGUI extends javax.swing.JFrame {
-    
-    /** 
+
+    /**
      * Class instance ArrayList of Dancer objects.
      */
     private ArrayList<Dancer> dancers = new ArrayList<>();
-        
+
     /**
      * External file name of dancers.
      */
@@ -47,11 +61,11 @@ public class DansaGUI extends javax.swing.JFrame {
                 getImage("src/cafedansadatabase/Bottle_Dancers_USA.jpg"));
         // Centers the form at start.
         setLocationRelativeTo(null);
-        
+
         // Read form an external file Dancers.txt and create an
-        // ArrayList of Dancer type, dancers        
+        // ArrayList of Dancer type, dancers
         readFromFile(fileName);
-        
+
         // Show the Dancer names in the JList
         displayDancers();
         showDancerData(dancersJList.getSelectedIndex());
@@ -59,22 +73,21 @@ public class DansaGUI extends javax.swing.JFrame {
 
      /**
      * Method: readFromFile
-     * Reads cities from a text file that is comma delimited and
+     * Reads dancers from a text file that is comma delimited and
      * creates an instance of the Dancer class with the data read.
      * Then the newly created Dancer is added to the cities database.
      * Uses an object from the ReadFile class to read record.
-     * @parem file: String
-     * @return void
+     * @param file String The file path of the database to be read.
+     *
      * pre-condition: a valid file name, Dancers.txt is expected
      * for input with comma separated text fields (but no spaces) for
-     * dancer name, dance style, proficiency, years of experience, 
+     * dancer name, dance style, proficiency, years of experience,
      * phone number, and email.
      * post-condition: a new Dancer is created with the read fields
      * and added to the ArrayList dancers
-     * @see ReadFile
-     * @see Member
+     * @see DancerFileReader
      */
-    public void readFromFile(String file)            
+    private void readFromFile(String file)
     {
         dancers.clear();
         DancerFileReader reader = new DancerFileReader(file);
@@ -86,13 +99,11 @@ public class DansaGUI extends javax.swing.JFrame {
         }
         reader.close();
     }
-    
+
     /**
      * Method: displayDancers()
-     * Displays dancers in JList sorted by years of experience using selection sort
-     * algorithm or last/first name using the insertion sort algorithm.
-     * @parem void
-     * @return void
+     * Displays dancers in JList sorted by years of experience using selection
+     * sort algorithm or last/first name using the insertion sort algorithm.
      * pre-condition: Uses the ArrayList dancers.
      * post-condition: dancers ArrayList is sorted and displayed either by
      * level or last name.
@@ -130,10 +141,10 @@ public class DansaGUI extends javax.swing.JFrame {
 
     /**
      * Method: insertionSort
-     * Sorts ArrayList dancers in ascending order by last name. Uses the insertion
-     * sort algorithm which inserts dancer at correct position and shuffles
-     * everyone else below that position.
-     * @param dancers
+     * Sorts ArrayList dancers in ascending order by last name. Uses the
+     * insertion sort algorithm which inserts dancer at correct position and
+     * shuffles everyone else below that position.
+     * @param dancers ArrayList of Dancer objects.
      */
     public static void insertionSort(ArrayList <Dancer> dancers) {
 	InsertionSortDancerLastName sorter = new InsertionSortDancerLastName();
@@ -142,35 +153,35 @@ public class DansaGUI extends javax.swing.JFrame {
 
     /**
      * Method: insertionSortFirst
-     * Sorts ArrayList dancers in ascending order by first name. Uses the insertion
-     * sort algorithm which inserts dancer at correct position and shuffles
-     * everyone else below that position.
-     * @param dancers
+     * Sorts ArrayList dancers in ascending order by first name. Uses the
+     * insertion sort algorithm which inserts dancer at correct position and
+     * shuffles everyone else below that position.
+     * @param dancers ArrayList of Dancer objects.
      */
     public static void insertionSortFirst(ArrayList <Dancer> dancers) {
 	InsertionSortDancerFirst sorter = new InsertionSortDancerFirst();
         sorter.sort(dancers);
-    }    
-    
+    }
+
     /**
      * Method: selectionSort
      * Sorts ArrayList dancers in descending order by population. Calls
-     * findsMaximum to find dancer with maximum experience (in years) in each pass
-     * and swap to exchange dancers when necessary.
-     * @param dancers
+     * findsMaximum to find dancer with maximum experience (in years) in each
+     * pass and swap to exchange dancers when necessary.
+     * @param dancers ArrayList of Dancer objects.
      */
     public void selectionSort(ArrayList < Dancer > dancers) {
         SelectionSortYears sorter = new SelectionSortYears();
         sorter.sort(dancers);
-    }  
+    }
 
     /**
      * Method: findMaximum
      * Called by selectionSort to find the index of the member with the maximum
-     * years of experience from a given index to the end of the ArrayList
-     * @parem ArrayList: dancers
-     * @parem  int i: index from which to search for the max >= 0
-     * @return int: position or index  where maximum is located
+     * years of experience from a given index to the end of the ArrayList.
+     * @param dancers ArrayList of Dancer objects.
+     * @param i int: index from which to search for the max >= 0
+     * @return maxIndex int position or index  where maximum is located
      * pre-condition: ArrayList members filled-in with members objects, int i >= 0.
      * post-condition: members ArrayList is sorted by level.
      */
@@ -189,14 +200,13 @@ public class DansaGUI extends javax.swing.JFrame {
     }
 
     /**
-     * Method: swap
      * Called by selectionSort to find the index of the member with the maximum
      * level from a given index to the end of the ArrayList
-     * @parem ArrayList: members
-     * @parem  int i: index of element to be swapped >= 0
-     * @parem  int j: index of element to be swapped >= 0
-     * @return void
-     * pre-condition: ArrayList members filled-in with members objects, int i, j >= 0.
+     * @param dancers ArrayList of Dancer Objects
+     * @param i int index of element to be swapped >= 0
+     * @param j int index of element to be swapped >= 0
+     * pre-condition: ArrayList members filled-in with members objects,
+     *     int i, j >= 0.
      * post-condition: members ArrayList with two members swapped.
      */
     public void swap(ArrayList < Dancer > dancers, int i, int j) {
@@ -207,9 +217,10 @@ public class DansaGUI extends javax.swing.JFrame {
 
     /** showDancerData
      * This method is called from within the constructor to
-     * display the data for the selected city.
+     * display the data for the selected dancer.
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.
+     * @param index index of the selected Dancer.
      */
     private void showDancerData(int index) {
         if (index == -1) {
@@ -221,8 +232,8 @@ public class DansaGUI extends javax.swing.JFrame {
         yearsJTextField.setText(String.valueOf(dancers.get(index).getYears()));
         phoneJTextField.setText(dancers.get(index).getPhone());
         emailJTextField.setText(dancers.get(index).getEmail());
-    }   
-    
+    }
+
     //CHECKSTYLE:OFF
     /**
      * This method is called from within the constructor to initialize the form.
@@ -298,11 +309,11 @@ public class DansaGUI extends javax.swing.JFrame {
         titleJPanelLayout.setHorizontalGroup(
             titleJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(titleJPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logoJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(logoJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(titleJLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(titleJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(logoJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5))
         );
@@ -311,11 +322,12 @@ public class DansaGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titleJPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(titleJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, titleJPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(logoJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(titleJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, titleJPanelLayout.createSequentialGroup()
-                        .addGroup(titleJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(logoJLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(logoJLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(logoJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -613,7 +625,7 @@ public class DansaGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     //CHECKSTYLE:ON
-    
+
     /**
      * Clears all fields and sets them to be editable.
      * @return void
@@ -632,13 +644,13 @@ public class DansaGUI extends javax.swing.JFrame {
         phoneJTextField.setText("");
         phoneJTextField.setEditable(true);
         nameJTextField.requestFocus();
-       
+
     }
-        
+
     /**
      * Listens to dancersJList and updates the displayed dancer info according
      * to the dancer selected in the JList.
-     * @param evt 
+     * @param evt
      */
     private void dancersJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_dancersJListValueChanged
         int index = (dancersJList.getSelectedIndex());
@@ -649,9 +661,10 @@ public class DansaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dancersJListValueChanged
 
     /**
-     * Listens to addJButton, spawns addCity form, saves a new Dancer in
+     * Listens to addJButton, spawns addDancer form, saves a new Dancer in
      * the database, selects the new Dancer in the JList.
-     * @param evt 
+     * @param evt
+     * @see AddDancer The form used to add a dancer.
      */
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
         // Add new dancer
@@ -674,21 +687,26 @@ public class DansaGUI extends javax.swing.JFrame {
                 saveDancers();
             } else {
                 JOptionPane.showMessageDialog(null, "Dancer not Added",
-                                              "Dancer is null or already exists", 
+                                              "Dancer is null or already exists",
                                               JOptionPane.WARNING_MESSAGE);
                 dancersJList.setVisible(true);
                 dancersJList.setSelectedIndex(0);
             }
         }
         catch (NullPointerException nullex) {
-            JOptionPane.showMessageDialog(null, "Dancer not Added", 
-                                          "Input Error", 
+            JOptionPane.showMessageDialog(null, "Dancer not Added",
+                                          "Input Error",
                                           JOptionPane.WARNING_MESSAGE);
             dancersJList.setVisible(true);
             dancersJList.setSelectedIndex(0);
         }
     }//GEN-LAST:event_addJButtonActionPerformed
 
+    /**
+     * Spawns the form used to edit a Dancer object before saving that Dancer
+     * back into our database.
+     * @param evt
+     */
     private void editJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJButtonActionPerformed
         //Clear and set JTextFields visible--not a good a good implementation
 
@@ -709,6 +727,11 @@ public class DansaGUI extends javax.swing.JFrame {
         //degreeJTextFieldActionPerformed(evt);
     }//GEN-LAST:event_editJButtonActionPerformed
 
+    /**
+     * Deletes a dancer from our database, dynamically, after asking for
+     * confirmation.
+     * @param evt
+     */
     private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
         int reply = JOptionPane.showConfirmDialog(this, "Are you sure?",
             "Confirm Dancer deletion...",
@@ -723,56 +746,113 @@ public class DansaGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteJButtonActionPerformed
 
+    /**
+     * Prints out the entire form.
+     * @param evt
+     */
     private void printJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printJButtonActionPerformed
         // Use the PrintUtilities class to print the GUI
         PrintUtilities.printComponent(this);
     }//GEN-LAST:event_printJButtonActionPerformed
 
+    /**
+     * Exits the program on button click.
+     * @param evt
+     */
     private void exitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitJButtonActionPerformed
         // End  program
         System.exit(0);
     }//GEN-LAST:event_exitJButtonActionPerformed
 
+    /**
+     * Clears all fields and reset form by calling the method clearAll
+     * @param evt
+     */
     private void clearJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearJMenuItemActionPerformed
-        // Empty all fields and reset form by calling the method clearAll
         clearAll();
     }//GEN-LAST:event_clearJMenuItemActionPerformed
 
+    /**
+     * Prints out the entire form.
+     * @param evt
+     */
     private void printJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printJMenuItemActionPerformed
-        // Print entire form
-        printJButtonActionPerformed(evt);
+        PrintUtilities.printComponent(this);
     }//GEN-LAST:event_printJMenuItemActionPerformed
 
+    /**
+     * Exits the program on JMenuItem click.
+     * @param evt
+     */
     private void exitJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitJMenuItemActionPerformed
         // Quit the application
         exitJButtonActionPerformed(evt);
     }//GEN-LAST:event_exitJMenuItemActionPerformed
 
+    /**
+     * This method sorts the dancers array list by last name and updates
+     * dancersJList to display the dancers in this order.
+     * @param evt
+     * @see InsetionSortDancerLastName
+     */
     private void nameJRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameJRadioButtonMenuItemActionPerformed
         // display dancers sorted by last name
         displayDancers();
     }//GEN-LAST:event_nameJRadioButtonMenuItemActionPerformed
 
+    /**
+     * This method sorts the dancers array list by years of experience and
+     * updates dancersJList to display the dancers in this order.
+     * @param evt
+     * @see SelectionSortYears
+     */
     private void yearJRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearJRadioButtonMenuItemActionPerformed
         // display dancers sorted by years of experience
         displayDancers();
     }//GEN-LAST:event_yearJRadioButtonMenuItemActionPerformed
 
+    /**
+     * Listens to addJMenuItem, calls addJButtonActionPerformed, spawns
+     * addDancer form, saves a new Dancer in the database, selects the new Dancer
+     * in the JList.
+     * @param evt
+     * @see AddDancer The form used to add a dancer.
+     * @see addJButtonActionPerformed
+     */
     private void addJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJMenuItemActionPerformed
         // call buttonAddActionPerformed
         addJButtonActionPerformed(evt);
     }//GEN-LAST:event_addJMenuItemActionPerformed
 
+    /**
+     * Deletes a dancer from our database, dynamically, after asking for
+     * confirmation. This is done by calling deleteJButtonActionPerformed.
+     * @param evt
+     * @see deleteJButtonActionPerformed
+     */
     private void deleteJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJMenuItemActionPerformed
         // call buttonDeleteActionPerformed
         deleteJButtonActionPerformed(evt);
     }//GEN-LAST:event_deleteJMenuItemActionPerformed
 
+    /**
+     * Spawns the form used to edit a Dancer object before saving that Dancer
+     * back into our database. This is done by calling
+     * editJButtonActionPerformed.
+     * @param evt
+     * @see editJButtonActionPerformed
+     */
     private void editJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJMenuItemActionPerformed
         // call buttonEditActionPerformed
         editJButtonActionPerformed(evt);
     }//GEN-LAST:event_editJMenuItemActionPerformed
 
+    /**
+     * Initiates search for a dancer with a specific name, or a name that
+     * contains our search parameter. Does this by calling searchDancer.
+     * @param evt
+     * @see searchDancer
+     */
     private void searchJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchJMenuItemActionPerformed
         // Find specified dancer
         String dancerName = JOptionPane.showInputDialog(this, "Search for:",
@@ -781,12 +861,23 @@ public class DansaGUI extends javax.swing.JFrame {
         searchDancer(dancerName);
     }//GEN-LAST:event_searchJMenuItemActionPerformed
 
+    /**
+     * Spawns the about form. The about form is the about page for this
+     * project.
+     * @param evt
+     */
     private void aboutJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutJMenuItemActionPerformed
         AboutJFrame dancerAbout = new AboutJFrame();
         dancerAbout.setVisible(true);
 
     }//GEN-LAST:event_aboutJMenuItemActionPerformed
 
+    /**
+     * This method sorts the dancers array list by first name and updates
+     * dancersJList to display the dancers in this order.
+     * @param evt
+     * @see InsetionSortDancerFirst
+     */
     private void firstNameJRadioButtonMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameJRadioButtonMenuItemActionPerformed
         displayDancers();
     }//GEN-LAST:event_firstNameJRadioButtonMenuItemActionPerformed
@@ -795,19 +886,18 @@ public class DansaGUI extends javax.swing.JFrame {
      * Method: saveDancers
      * Saves the dancers to a file in the alphabetical order of their last name.
      * @see writeToFile
-     * @return void
      */
     private void saveDancers()
-    {       
+    {
         writeToFile(this.fileName);
     }
-    
+
     /**
      * Method: dancerExists
-     * Performs linear search through Dancer list, `this.dancers`, 
+     * Performs linear search through Dancer list, `this.dancers`,
      * to determine if the specified Dancer object exists.
-     * @param dancario - City whose existence is in question
-     * @return boolean: true if the city exist.
+     * @param dancario - Dancer whose existence is in question
+     * @return boolean true if the dancer exists.
      */
     private boolean dancerExists(Dancer dancario)
     {
@@ -820,12 +910,11 @@ public class DansaGUI extends javax.swing.JFrame {
     }
 
     /**
-     * Method: searchDancer
-     * Searches for a Dancer by how they are currently sorted.
+     * Searches for a Dancer using linear search to find the first name
+     * to contain the String dancerName.
      * Dancer are first sorted by last name, and then the index of the
      * desired dancer is given.
-     * @param dancerName 
-     * @return void
+     * @param dancerName The name of the Dancer we are searching for.
      */
     private void searchDancer(String dancerName)
     {
@@ -836,9 +925,9 @@ public class DansaGUI extends javax.swing.JFrame {
             for (int i = 0; i < dancers.size(); i++) {
                 dancerNames[i] = dancers.get(i).getName().toLowerCase();
             }
-            int index = linearSearch(dancerNames, dancerName);    
+            int index = linearSearch(dancerNames, dancerName);
             if (index != -1) {
-                dancersJList.setSelectedIndex(index);   
+                dancersJList.setSelectedIndex(index);
             } else {
                 JOptionPane.showMessageDialog(this,
                                               dancerName+" not found.",
@@ -847,12 +936,18 @@ public class DansaGUI extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(this,
-                                          "No city name given.",
+                                          "No dancer name given.",
                                           "Search Error",
                                           JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
+    /**
+     * This method implements linear search for a String in a String[].
+     * @param array Thing we are searching through
+     * @param key Thing we are searching for
+     * @return index of where the key was found, or -1 if it was not.
+     */
     public int linearSearch(String[] array, String key) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].contains(key)){
@@ -861,7 +956,7 @@ public class DansaGUI extends javax.swing.JFrame {
         }
         return -1;
     }
-    
+
     /**
      * Calls our implementation for binary search.
      * @param array - Comparable type array to be searched through
@@ -874,12 +969,10 @@ public class DansaGUI extends javax.swing.JFrame {
 //        int result = searcher.binarySearch(array, key);
         return -1;
     }
-    
+
      /**
-     * Method: writeToFile
-     * Write cities to a text file that is comma delimited.
-     * @parem file: String
-     * @return void
+     * Write dancers to a text file that is comma delimited.
+     * @param file The file path of our database to be written
      * pre-condition: a valid file name, Dancers.txt is expected
      * post-condition: a new text file is created with the current dancers
      * in the database
@@ -890,16 +983,17 @@ public class DansaGUI extends javax.swing.JFrame {
         DancerFileWriter writer = new DancerFileWriter(file, dancers);
         writer.writeTheFile();
     }
-    
-    
+
+
     /**
+     * Runs our program and spawns our GUI.
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

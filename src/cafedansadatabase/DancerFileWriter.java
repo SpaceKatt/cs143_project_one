@@ -16,39 +16,56 @@
  */
 package cafedansadatabase;
 
-import java.awt.List;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author thomas.kercheval
+ * DancerFileWriter.java
+ * This class provides an abstraction to write our database one line at a time.
+ * <pre>
+    Project: CafeDansa Database
+    Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
+    Course: CS 143
+    Created on Apr 9, 2016, 1:34:43 PM
+    Revised on Arp 12, 2016, 2:31:23 PM
+ </pre>
+ * @author Thomas Kercheval
  */
 class DancerFileWriter {
-    
-    // File path (relative)
-    private final String file;
-    // List of lines to be written
-    private ArrayList<String> lines;
-    
+
+    /**
+     * File path (relative) to our database.
+     */
+    private final String filePath;
+
+    /**
+     * List of lines to be written.
+     */
+    private final ArrayList<String> lines;
+
     /**
      * Constructor which stores the relative path of our database and
-     * creates the lines to be written in our file.
-     * @param file Relative file path of city database
+     * creates the lines to be written in our filePath.
+     * @param file Relative filePath path of Dancer database
      * @param dancers ArrayList of dancers to be written
      */
     DancerFileWriter(String file, ArrayList<Dancer> dancers) {
-        this.file = file;
+        this.filePath = file;
         this.lines = createLines(dancers);
     }
-    
+
+    /**
+     * Creates the lines to be written by this class.
+     * Takes each dancer and creates a line to be written in our database.
+     * @param dancers ArrayList of our Dancer objects that need to be written
+     * @return ArrayList populated by the dancers and their information.
+     */
     private ArrayList<String> createLines(ArrayList<Dancer> dancers) {
         ArrayList<Dancer> sortDancer = new ArrayList<>(dancers);
         InsertionSortDancerLastName sorter = new InsertionSortDancerLastName();
@@ -67,13 +84,21 @@ class DancerFileWriter {
         newLines.stream().forEach(System.out::println);
         return newLines;
     }
-    
+
+    /**
+     * Writes all the lines created by createLines() into a filePath specified
+     * by this.filePath
+     * @see createLines
+     * @see java.nio.file.Files
+     * @see java.nio.file.Path
+     * @see java.nio.file.Paths
+     */
     public void writeTheFile() {
-        Path filePath = Paths.get(this.file);
+        Path filePath = Paths.get(this.filePath);
         try {
             Files.write(filePath, lines, Charset.forName("UTF-8"));
         } catch (IOException ex) {
-            Logger.getLogger(DancerFileWriter.class.getName()).log(Level.SEVERE, 
+            Logger.getLogger(DancerFileWriter.class.getName()).log(Level.SEVERE,
                                                                  null, ex);
         }
     }

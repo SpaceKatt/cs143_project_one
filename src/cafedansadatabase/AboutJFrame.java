@@ -17,11 +17,26 @@
 package cafedansadatabase;
 
 /**
+ * AboutJFrame.java
+ A class representing the GUI used in a maintaining a dancers database.
+ * <pre>
+    Project: Cafe Dansa Database
+    Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
+    Course:
+    Hours: 0 Hours and 55 Min
+    Created on Apr 11, 2016, 2:42:31 PM
+    Revised on Apr 12, 2016, 12:05:24 PM
+ </pre>
  *
- * @author thomas.kercheval
+ * @author:	thomas.kercheval@go.shoreline.edu
+ * @version: 	%1% %2%
  */
+
 public class AboutJFrame extends javax.swing.JDialog {
 
+    /**
+     * Spawns our JDialog to show information about our project.
+     */
     public AboutJFrame() {
         initComponents();
         this.getRootPane().setDefaultButton(closeJButton);
@@ -131,6 +146,10 @@ public class AboutJFrame extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Closes this modal JDialog.
+     * @param evt 
+     */
     private void closeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeJButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_closeJButtonActionPerformed

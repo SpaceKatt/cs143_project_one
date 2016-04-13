@@ -24,34 +24,78 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
- *
- * @author thomas.kercheval
+ * DancerFileReader.java
+ * This class provides an abstraction to read our database one line at a time.
+ * <pre>
+    Project: CafeDansa Database
+    Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
+    Course: CS 143
+    Created on Apr 9, 2016, 1:32:24 PM
+    Revised on Arp 12, 2016, 2:28:03 PM
+ </pre>
+ * @author Thomas Kercheval
  */
 public class DancerFileReader {
-    
-    private final String file_path;
-    String city_info;
-    BufferedReader buffRead;
-    
-    DancerFileReader(String file_name) {
-        this.file_path = file_name;
-//        if (!getFileExists()) {
-//            System.exit(0);
-//        }
+
+    /**
+     * Relative path to the Dancer database.
+     */
+    private final String filePath;
+    /**
+     * BufferedReader object that will read our files, line by line.
+     */
+    private final BufferedReader buffRead;
+
+    /**
+     * Initializes File Reader, catches file not found error.
+     * @param fileName String of file Path
+     */
+    DancerFileReader(String fileName) {
+        this.filePath = fileName;
+        this.buffRead = createReader();
+        if (this.buffRead == null) {
+            JOptionPane.showMessageDialog(null,
+                                          "Database at \n"
+                                          + this.filePath
+                                          + "\nnot Found.",
+                                          "IOError",
+                                          JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Creates our file reader object and returns it to the constructor.
+     * Doing it in this way allows us to declare the reader as final.
+     * @return BufferedReader which will read our file at filePath.
+     */
+    private BufferedReader createReader() {
+        BufferedReader reader =  null;
         try {
-            buffRead = new BufferedReader(new FileReader(this.file_path));
+            reader =  new BufferedReader(new FileReader(this.filePath));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DancerFileReader.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return reader;
     }
-    
+
+    /**
+     * Checks for the existence of our file at a given path.
+     * @return true if file exists.
+     */
     public boolean getFileExists() {
-        File city_file = new File(this.file_path);
-        boolean result = city_file.exists() && !city_file.isDirectory();
+        File dancerFile = new File(this.filePath);
+        boolean result = dancerFile.exists() && !dancerFile.isDirectory();
         return result;
     }
-    
+
+    /**
+     * Returns the next line of our file at filePath.
+     * @return String representation of a line in the file.
+     */
     public String readRecord() {
         String line = null;
         try {
@@ -62,6 +106,10 @@ public class DancerFileReader {
         return line;
     }
 
+    /**
+     * Closes our BufferedReader object. Forgetting this step may cause
+     * unexpected errors while trying to dynamically update our database.
+     */
     void close() {
         try {
             buffRead.close();

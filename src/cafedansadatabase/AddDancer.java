@@ -22,6 +22,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
+ * AddDancer.java
  * A class which defines the form by which users may add a dancer
  * to our application.
  * <pre>
@@ -39,7 +40,7 @@ public class AddDancer extends javax.swing.JDialog {
      * The Dancer object which will be added to the Dancer database.
      */
     private Dancer newDancer;
-    
+
     /**
      * Creates new form AddDancer
      */
@@ -57,11 +58,11 @@ public class AddDancer extends javax.swing.JDialog {
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().
                 getImage("src/cafedansadatabase/Bottle_Dancers_USA.jpg"));
-        String[] styles = new String[]{"baladi", "balkan", "ballet", "ballroom", 
-                                       "bhangra", "irish step dancing", 
-                                       "milonga", "modern pop", "salsa", 
+        String[] styles = new String[]{"baladi", "balkan", "ballet", "ballroom",
+                                       "bhangra", "irish step dancing",
+                                       "milonga", "modern pop", "salsa",
                                        "samba", "tap"};
-        String[] profs = new String[]{"beginner", "intermediate", "advanced", 
+        String[] profs = new String[]{"beginner", "intermediate", "advanced",
                                       "expert", "master", "guru"};
         Integer[] yearOptions = new Integer[100];
         for (int i = 0; i < yearOptions.length; i++) {
@@ -74,13 +75,13 @@ public class AddDancer extends javax.swing.JDialog {
 
     /**
      * Method: getDancer
-     * Returns the new dancer object
+     * Returns the new Dancer object.
      * @return Dancer: the new dancer to be added.
      */
     Dancer getDancer() {
         return newDancer;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -236,7 +237,7 @@ public class AddDancer extends javax.swing.JDialog {
     /**
      * Event handler for saving the new dancer from text field input.
      * Validates input before saving and closing the pop-up window.
-     * @param evt 
+     * @param evt
      * @return void
      */
     private void saveJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveJButtonActionPerformed
@@ -246,9 +247,9 @@ public class AddDancer extends javax.swing.JDialog {
         String phone = phoneJTextField.getText();
         String style = (String) styleJComboBox.getSelectedItem();
         String email = emailJTextField.getText();
-        boolean condition = !(name.equals("") || prof.equals("") ||
-                            style.equals("") || phone.equals("") || 
-                            email.equals(""));
+        boolean condition = !(name.equals("") || prof.equals("")
+                            || style.equals("") || phone.equals("")
+                            || email.equals(""));
         if (condition) {
             try {
                 newDancer = new Dancer(name, style, prof, years, phone, email);
@@ -269,7 +270,7 @@ public class AddDancer extends javax.swing.JDialog {
 
     /**
      * Event handler for the cancellation of new Dancer creation.
-     * @param evt 
+     * @param evt
      * @return void
      */
     private void cancelJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelJButtonActionPerformed
@@ -286,7 +287,7 @@ public class AddDancer extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

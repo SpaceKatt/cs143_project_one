@@ -18,34 +18,32 @@
 package cafedansadatabase;
 
 /**
- *
- * @author thomas.kercheval
+ * Dancer.java
+ * Abstract Data Type describing a dancer with various information
+ * attached to it. These Dancer objects will be used to populate
+ * the database in our application.
+ * <pre>
+    Project: CafeDansa Database
+    Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
+    Course: CS 143
+    Created on Apr 5, 2016, 1:26:19 PM
+    Revised on Arp 12, 2016, 2:30:21 PM
+ </pre>
+ * @author Thomas Kercheval
  */
 class Dancer {
 
-    /**
-     * Name of the Dancer.
-     */
+    /** Name of the Dancer. */
     private String dancerName;
-    /**
-     * Dance style of the Dancer.
-     */
+    /** Dance style of the Dancer. */
     private String style;
-    /**
-     * Proficiency of the Dancer.
-     */
+    /** Proficiency of the Dancer. */
     private String prof;
-    /**
-     * Number of years the Dancer has been practicing.
-     */
+    /** Number of years the Dancer has been practicing. */
     private int years;
-    /**
-     * Phone number of the Dancer.
-     */
+    /** Phone number of the Dancer. */
     private String phone;
-    /**
-     * Email of the Dancer.
-     */
+    /** Email of the Dancer. */
     private String email;
 
     /**
@@ -65,7 +63,7 @@ class Dancer {
     public static final int PROF_INDEX = 2;
     /**
      * The index in an array passed to the Array constructor
-     * of the numer of Years the dancer has been practicing.
+     * of the number of Years the dancer has been practicing.
      */
     public static final int YEARS_INDEX = 3;
     /**
@@ -78,8 +76,6 @@ class Dancer {
      * of the Dancer's Email Address.
      */
     public static final int EMAIL_INDEX = 5;
-
-
 
     /**
      * Default constructor, sets everything to the default value.
@@ -155,9 +151,9 @@ class Dancer {
         this.years = dancer.years;
         this.phone = dancer.phone;
     }
-//CHECKSTYLE:OFF
+    
     /**
-     * Returns the Dancer's name.
+     *
      * @return The name of the Dancer.
      */
     public String getName() {
@@ -166,10 +162,10 @@ class Dancer {
 
     /**
      *
-     * @param dancerName The name of the Dancer.
+     * @param nameDancer The name of the Dancer.
      */
-    public void setDancerName(final String dancerName) {
-        this.dancerName = dancerName;
+    public void setDancerName(final String nameDancer) {
+        this.dancerName = nameDancer;
     }
 
     /**
@@ -182,10 +178,10 @@ class Dancer {
 
     /**
      *
-     * @param style The Style of Dance chosen by the Dancer.
+     * @param danceStyle The Style of Dance chosen by the Dancer.
      */
-    public void setStyle(final String style) {
-        this.style = style;
+    public void setStyle(final String danceStyle) {
+        this.style = danceStyle;
     }
 
     /**
@@ -198,10 +194,10 @@ class Dancer {
 
     /**
      *
-     * @param prof Level of proficiency of the Dancer.
+     * @param proficiency Level of proficiency of the Dancer.
      */
-    public void setProf(final String prof) {
-        this.prof = prof;
+    public void setProf(final String proficiency) {
+        this.prof = proficiency;
     }
 
     /**
@@ -214,10 +210,10 @@ class Dancer {
 
     /**
      *
-     * @param years Number of years the Dancer has been practicing.
+     * @param yearsExp Number of years the Dancer has been practicing.
      */
-    public void setYears(final int years) {
-        this.years = years;
+    public void setYears(final int yearsExp) {
+        this.years = yearsExp;
     }
 
     /**
@@ -230,10 +226,10 @@ class Dancer {
 
     /**
      *
-     * @param phone The Dancer's Phone Number.
+     * @param phoneNum The Dancer's Phone Number.
      */
-    public void setPhone(final String phone) {
-        this.phone = phone;
+    public void setPhone(final String phoneNum) {
+        this.phone = phoneNum;
     }
 
     /**
@@ -246,10 +242,10 @@ class Dancer {
 
     /**
      *
-     * @param email The Dancer's Email Address.
+     * @param emailAdd The Dancer's Email Address.
      */
-    public void setEmail(final String email) {
-        this.email = email;
+    public void setEmail(final String emailAdd) {
+        this.email = emailAdd;
     }
 //CHECKSTYLE:ON
 

@@ -24,12 +24,21 @@ import java.util.ArrayList;
  * @author Thomas
  */
 public class InsertionSortDancerFirst {
-    /* Compares two values. */
+    /**
+     * Compares two values.
+     * @param one
+     * @param two
+     * @return 
+     */
     private boolean less(Dancer one, Dancer two) {
         return one.getName().compareToIgnoreCase(two.getName()) < 0;
     }
     
-    /* Checks to make sure the ArrayList is sorted. */ 
+    /**
+     * Checks to make sure the ArrayList is sorted.
+     * @param list
+     * @return 
+     */
     private boolean isSorted(ArrayList<Dancer> list) {
         for (int i = 0; i < list.size(); i++) {
             if(less(list.get(i), list.get(i - 1))) { return false; }
@@ -37,14 +46,22 @@ public class InsertionSortDancerFirst {
         return true;
     }
     
-    /* Swaps two elements in an ArrayList. */
+    /**
+     * Swaps two elements in an ArrayList.
+     * @param list
+     * @param indexOne
+     * @param indexTwo 
+     */
     private void swap(ArrayList list, int indexOne, int indexTwo) {
         Object temp = list.get(indexTwo);
         list.set(indexTwo, list.get(indexOne));
         list.set(indexOne, temp);
     }
     
-    /* Uses  insertion sort to sort an ArrayList of Cities by name. */
+    /**
+     * Uses  insertion sort to sort an ArrayList of Cities by name.
+     * @param list 
+     */
     public void sort(ArrayList<Dancer> list) {
         int arraySize = list.size();
         for (int i = 0; i < arraySize; i++) {

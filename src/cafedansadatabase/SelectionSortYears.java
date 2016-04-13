@@ -26,12 +26,21 @@ import java.util.ArrayList;
  */
 public class SelectionSortYears {
     
-    /** Compares two values. */
+    /**
+     * Compares two values.
+     * @param one
+     * @param two
+     * @return 
+     */
     private boolean less(Dancer one, Dancer two) {
         return one.getYears() < two.getYears();
     }
     
-    /** Checks to make sure the ArrayList is sorted. */ 
+    /**
+     * Checks to make sure the ArrayList is sorted.
+     * @param list
+     * @return 
+     */
     private boolean isSorted(ArrayList<Dancer> list) {
         for (int i = 0; i < list.size(); i++) {
             if(less(list.get(i), list.get(i - 1))) { return false; }
@@ -39,14 +48,22 @@ public class SelectionSortYears {
         return true;
     }
     
-    /** Swaps two elements in an ArrayList. */
+    /**
+     * Swaps two elements in an ArrayList.
+     * @param list
+     * @param indexOne
+     * @param indexTwo 
+     */
     private void swap(ArrayList list, int indexOne, int indexTwo) {
         Object temp = list.get(indexTwo);
         list.set(indexTwo, list.get(indexOne));
         list.set(indexOne, temp);
     }
     
-    /** Uses  insertion sort to sort an ArrayList of Cities by population. */
+    /**
+     * Uses  insertion sort to sort an ArrayList of Cities by population.
+     * @param list 
+     */
     public void sort(ArrayList<Dancer> list) {
         int arraySize = list.size();
         for (int i = 0; i < arraySize; i++) {
