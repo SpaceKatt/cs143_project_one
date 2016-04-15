@@ -22,61 +22,73 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
- * AddDancer.java
+ * EditDancer.java
  * A class which defines the form by which users may add a dancer
  * to our application.
  * <pre>
     Project: CafeDansa Database
     Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
     Course: CS 143
-    Created on Apr 5, 2016, 12:32:49 PM
-    Revised on Arp 10, 2016, 2:30:21 PM
+    Created on Apr 14, 2016, 12:04:19 PM
+    Revised on Arp 14, 2016, 2:27:35 PM
  </pre>
  * @author Thomas Kercheval
  */
-public class AddDancer extends javax.swing.JDialog {
+public class EditDancer extends javax.swing.JDialog {
 
     /**
-     * The Dancer object which will be added to the Dancer database.
+     * The Dancer object which will replace the oldDancer we are editing.
      */
-    private Dancer newDancer;
+    private Dancer editDancer;
+    /**
+     * The Dancer object which will be replaced by editDancer.
+     */
+    private Dancer oldDancer;
 
     /**
-     * Creates new form AddDancer
+     * Creates new form EditDancer
      */
-    public AddDancer() {
+    public EditDancer() {
         initComponents();
     }
 
     /**
-     * Constructor which spawns AddDancer GUI and sets modality.
-     * @param aThis GUI which spawns AddDancer
+     * Constructor which spawns EditDancer GUI and sets modality.
+     * @param aThis GUI which spawns EditDancer
      * @param b boolean value which indicates modality
      */
-    AddDancer(DansaGUI aThis, boolean b) {
+    EditDancer(DansaGUI aThis, boolean b, Dancer oldDancer) {
         this.setModal(b);
+        this.oldDancer = oldDancer;
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().
                 getImage("src/cafedansadatabase/Bottle_Dancers_USA.jpg"));
-        this.getRootPane().setDefaultButton(addJButton);
+        this.getRootPane().setDefaultButton(saveJButton);
         Integer[] yearOptions = new Integer[100];
         for (int i = 0; i < yearOptions.length; i++) {
             yearOptions[i] = i;
         }
+        
         styleJComboBox.setModel(new DefaultComboBoxModel(
                 DansaGUI.STYLES));
         profJComboBox.setModel(new DefaultComboBoxModel(
                 DansaGUI.PROFICIENCIES));
         yearsJComboBox.setModel(new DefaultComboBoxModel(yearOptions));
+        nameJTextField.setText(this.oldDancer.getName());
+        styleJComboBox.setSelectedItem(this.oldDancer.getStyle());
+        profJComboBox.setSelectedItem(this.oldDancer.getProf());
+        yearsJComboBox.setSelectedItem(this.oldDancer.getYears());
+        phoneJTextField.setText(this.oldDancer.getPhone());
+        emailJTextField.setText(this.oldDancer.getEmail());
     }
 
     /**
      * Method: getDancer
      * Returns the new Dancer object.
-     * @return Dancer: the new dancer to be added.
+     * @return Dancer: the dancer being edited.
      */
     Dancer getDancer() {
-        return newDancer;
+        return editDancer;
     }
 
     /**
@@ -92,7 +104,7 @@ public class AddDancer extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         controlPanel = new javax.swing.JPanel();
-        addJButton = new javax.swing.JButton();
+        saveJButton = new javax.swing.JButton();
         exitJButton = new javax.swing.JButton();
         displayJPanel = new javax.swing.JPanel();
         nameJLabel = new javax.swing.JLabel();
@@ -109,14 +121,14 @@ public class AddDancer extends javax.swing.JDialog {
         emailJTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add New Dancer Form");
+        setTitle("Edit Dancer Form");
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cafedansadatabase/The-3-Dancers_3-photo-Chris-Nash-1024x682.jpg"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 2, 36)); // NOI18N
-        jLabel2.setText("Add New Dancer");
+        jLabel2.setText("Edit Existing Dancer");
 
         javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
         titlePanel.setLayout(titlePanelLayout);
@@ -125,9 +137,9 @@ public class AddDancer extends javax.swing.JDialog {
             .addGroup(titlePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-                .addGap(64, 64, 64))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         titlePanelLayout.setVerticalGroup(
             titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,25 +159,25 @@ public class AddDancer extends javax.swing.JDialog {
         controlPanel.setMinimumSize(new java.awt.Dimension(299, 45));
         controlPanel.setLayout(new java.awt.GridLayout(1, 5, 5, 5));
 
-        addJButton.setBackground(new java.awt.Color(204, 255, 204));
-        addJButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        addJButton.setMnemonic('S');
-        addJButton.setText("Save");
-        addJButton.setToolTipText("Save new Dancer");
-        addJButton.setMinimumSize(new java.awt.Dimension(57, 45));
-        addJButton.setPreferredSize(new java.awt.Dimension(57, 35));
-        addJButton.addActionListener(new java.awt.event.ActionListener() {
+        saveJButton.setBackground(new java.awt.Color(204, 255, 204));
+        saveJButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        saveJButton.setMnemonic('S');
+        saveJButton.setText("Save");
+        saveJButton.setToolTipText("Save edited Dancer");
+        saveJButton.setMinimumSize(new java.awt.Dimension(57, 45));
+        saveJButton.setPreferredSize(new java.awt.Dimension(57, 35));
+        saveJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveJButtonActionPerformed(evt);
             }
         });
-        controlPanel.add(addJButton);
+        controlPanel.add(saveJButton);
 
         exitJButton.setBackground(new java.awt.Color(204, 255, 204));
         exitJButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         exitJButton.setMnemonic('C');
         exitJButton.setText("Cancel");
-        exitJButton.setToolTipText("Cancel adding new Dancer");
+        exitJButton.setToolTipText("Cancel editing Dancer");
         exitJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelJButtonActionPerformed(evt);
@@ -238,7 +250,7 @@ public class AddDancer extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Event handler for saving the new dancer from text field input.
+     * Event handler for saving the edited dancer from text field input.
      * Validates input before saving and closing the pop-up window.
      * @param evt
      * @return void
@@ -252,7 +264,13 @@ public class AddDancer extends javax.swing.JDialog {
         String email = emailJTextField.getText();
         if (validateFields(name, phone, email)) {
             try {
-                newDancer = new Dancer(name, style, prof, years, phone, email);
+                editDancer = new Dancer(name, style, prof, years, phone, email);
+//                this.editDancer.setDancerName(name);
+//                this.editDancer.setProf(prof);
+//                this.editDancer.setStyle(style);
+//                this.editDancer.setYears(years);
+//                this.editDancer.setPhone(phone);
+//                this.editDancer.setEmail(email);
                 this.setVisible(false);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this,
@@ -265,9 +283,9 @@ public class AddDancer extends javax.swing.JDialog {
 
     /**
      * Method to validate the input for a dancer.
-     * @param name Name of the Dancer to be added.
-     * @param phone Phone of the Dancer to be added.
-     * @param email Email of the Dancer to be added.
+     * @param name Name of the Dancer to be edited.
+     * @param phone Phone of the Dancer to be edited.
+     * @param email Email of the Dancer to be edited.
      * @return true if fields are valid.
      */
     private boolean validateFields(String name, String phone, String email) {
@@ -293,8 +311,6 @@ public class AddDancer extends javax.swing.JDialog {
                                           JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        
-        
         return true;
     }
     
@@ -305,7 +321,7 @@ public class AddDancer extends javax.swing.JDialog {
      */
     private void cancelJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelJButtonActionPerformed
         // End  program
-        this.newDancer = null;
+        this.editDancer = null;
         this.setVisible(false);
     }//GEN-LAST:event_cancelJButtonActionPerformed
 
@@ -327,27 +343,28 @@ public class AddDancer extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddDancer().setVisible(true);
+                new EditDancer().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addJButton;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JPanel displayJPanel;
     private javax.swing.JLabel emailJLabel;
@@ -361,6 +378,7 @@ public class AddDancer extends javax.swing.JDialog {
     private javax.swing.JTextField phoneJTextField;
     private javax.swing.JComboBox<String> profJComboBox;
     private javax.swing.JLabel profJLabel;
+    private javax.swing.JButton saveJButton;
     private javax.swing.JComboBox<String> styleJComboBox;
     private javax.swing.JLabel styleJLabel;
     private javax.swing.JPanel titlePanel;

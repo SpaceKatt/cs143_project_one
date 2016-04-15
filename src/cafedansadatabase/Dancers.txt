@@ -1,4 +1,4 @@
-Fred Astaire,ballroom,master,36,310-387-4499,astaire@ballet.net
+Fredie Astaire,ballroom,master,36,310-387-4499,astaire@ballet.net
 Mikhail Baryshnikov,ballet,intermediate,28,707-945-7765,baryshnikov@ballet.com
 Kahte Culevski,balkan,advanced,8,321-741-3771,kculevski@balkanbeat.net
 Sammy Davis,tap,expert,27,909-123-6578,davis@pop.com

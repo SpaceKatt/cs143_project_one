@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 thomas.kercheval
+ * Copyright (C) 2016 Thomas Kercheval
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,11 +45,22 @@ public class DansaGUI extends javax.swing.JFrame {
      * Class instance ArrayList of Dancer objects.
      */
     private ArrayList<Dancer> dancers = new ArrayList<>();
-
     /**
      * External file name of dancers.
      */
     private final String fileName = "src/cafedansadatabase/Dancers.txt";
+    
+    /**
+     * Different styles of dance employed by the dancers.
+     */
+    public final static String[] STYLES = new String[]{"baladi", "balkan", 
+        "ballet", "ballroom", "bhangra", "irish step dancing", "milonga", 
+        "modern pop", "salsa", "samba", "tap"};
+    /**
+     * Different levels of proficiency held by the dancers.
+     */
+    public final static String[] PROFICIENCIES = new String[]{"beginner", 
+        "intermediate", "advanced", "expert", "master", "guru"};
 
     /**
      * Creates new form DansaGUI
@@ -165,7 +176,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
     /**
      * Method: selectionSort
-     * Sorts ArrayList dancers in descending order by population. Calls
+     * Sorts ArrayList dancers in descending order by years of experience. Calls
      * findsMaximum to find dancer with maximum experience (in years) in each
      * pass and swap to exchange dancers when necessary.
      * @param dancers ArrayList of Dancer objects.
@@ -229,7 +240,8 @@ public class DansaGUI extends javax.swing.JFrame {
         nameJTextField.setText(dancers.get(index).getName());
         styleJTextField.setText(dancers.get(index).getStyle());
         profJTextField.setText(dancers.get(index).getProf());
-        yearsJTextField.setText(String.valueOf(dancers.get(index).getYears()));
+        yearsJTextField.setText(String.valueOf(dancers.get(index).getYears()) 
+                + " years");
         phoneJTextField.setText(dancers.get(index).getPhone());
         emailJTextField.setText(dancers.get(index).getEmail());
     }
@@ -291,6 +303,8 @@ public class DansaGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cafe Dansa Database");
+        setResizable(false);
+        getContentPane().setLayout(new java.awt.BorderLayout(0, 5));
 
         logoJLabel.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
         logoJLabel.setForeground(new java.awt.Color(51, 0, 0));
@@ -313,9 +327,9 @@ public class DansaGUI extends javax.swing.JFrame {
                 .addComponent(logoJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titleJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(5, 5, 5)
                 .addComponent(logoJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5))
+                .addContainerGap())
         );
         titleJPanelLayout.setVerticalGroup(
             titleJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,6 +349,7 @@ public class DansaGUI extends javax.swing.JFrame {
         getContentPane().add(titleJPanel, java.awt.BorderLayout.NORTH);
 
         dancersJList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        dancersJList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         dancersJList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 dancersJListValueChanged(evt);
@@ -353,11 +368,12 @@ public class DansaGUI extends javax.swing.JFrame {
         );
         listJPanelLayout.setVerticalGroup(
             listJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(llistJScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+            .addComponent(llistJScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
         );
 
         getContentPane().add(listJPanel, java.awt.BorderLayout.LINE_START);
 
+        displayJPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 10));
         displayJPanel.setLayout(new java.awt.GridLayout(6, 2, 5, 5));
 
         nameJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -367,6 +383,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         nameJTextField.setEditable(false);
         nameJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nameJTextField.setToolTipText("Dancer's name...");
         displayJPanel.add(nameJTextField);
 
         styleJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -376,7 +393,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         styleJTextField.setEditable(false);
         styleJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        styleJTextField.setToolTipText("Press Enter to update");
+        styleJTextField.setToolTipText("Style of Dance");
         displayJPanel.add(styleJTextField);
 
         profJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -386,7 +403,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         profJTextField.setEditable(false);
         profJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        profJTextField.setToolTipText("Enter with no $ or commas and press Enter to update");
+        profJTextField.setToolTipText("Level of expertise of the dancer");
         displayJPanel.add(profJTextField);
 
         yearsJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -396,7 +413,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         yearsJTextField.setEditable(false);
         yearsJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        yearsJTextField.setToolTipText("Enter without % sign and pres Enter to update");
+        yearsJTextField.setToolTipText("Years of dancing experience");
         displayJPanel.add(yearsJTextField);
 
         phoneJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -406,7 +423,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         phoneJTextField.setEditable(false);
         phoneJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        phoneJTextField.setToolTipText("Enter without % sign and press Enter to update");
+        phoneJTextField.setToolTipText("Phone Number of the Dancer");
         displayJPanel.add(phoneJTextField);
 
         emailJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -416,7 +433,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         emailJTextField.setEditable(false);
         emailJTextField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        emailJTextField.setToolTipText("Enter without % sign and press Enter to update");
+        emailJTextField.setToolTipText("Email address of the dancer");
         displayJPanel.add(emailJTextField);
 
         getContentPane().add(displayJPanel, java.awt.BorderLayout.CENTER);
@@ -429,7 +446,7 @@ public class DansaGUI extends javax.swing.JFrame {
         addJButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         addJButton.setMnemonic('A');
         addJButton.setText("Add");
-        addJButton.setToolTipText("Add new city");
+        addJButton.setToolTipText("Add new Dancer");
         addJButton.setMinimumSize(new java.awt.Dimension(57, 45));
         addJButton.setPreferredSize(new java.awt.Dimension(57, 35));
         addJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -443,7 +460,7 @@ public class DansaGUI extends javax.swing.JFrame {
         editJButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         editJButton.setMnemonic('E');
         editJButton.setText("Edit");
-        editJButton.setToolTipText("Edit city. Press Enter in any of the JTextFields to confirm changes...");
+        editJButton.setToolTipText("Edit Dancer. Press Enter in any of the JTextFields to confirm changes...");
         editJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editJButtonActionPerformed(evt);
@@ -455,7 +472,7 @@ public class DansaGUI extends javax.swing.JFrame {
         deleteJButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         deleteJButton.setMnemonic('D');
         deleteJButton.setText("Delete");
-        deleteJButton.setToolTipText("Delete city");
+        deleteJButton.setToolTipText("Delete Dancer");
         deleteJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteJButtonActionPerformed(evt);
@@ -467,7 +484,7 @@ public class DansaGUI extends javax.swing.JFrame {
         printJButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         printJButton.setMnemonic('P');
         printJButton.setText("Print");
-        printJButton.setToolTipText("Print individual city data");
+        printJButton.setToolTipText("Print individual dancer data");
         printJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 printJButtonActionPerformed(evt);
@@ -554,7 +571,7 @@ public class DansaGUI extends javax.swing.JFrame {
         menubuttonGroup.add(yearJRadioButtonMenuItem);
         yearJRadioButtonMenuItem.setMnemonic('B');
         yearJRadioButtonMenuItem.setText("By Years");
-        yearJRadioButtonMenuItem.setToolTipText("Sort by populatoin a nd display name and population");
+        yearJRadioButtonMenuItem.setToolTipText("Sort by years of experience, display name and years of experience.");
         yearJRadioButtonMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 yearJRadioButtonMenuItemActionPerformed(evt);
@@ -569,7 +586,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         addJMenuItem.setMnemonic('A');
         addJMenuItem.setText("Add New Dancer");
-        addJMenuItem.setToolTipText("Add new city");
+        addJMenuItem.setToolTipText("Add new Dancer");
         addJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addJMenuItemActionPerformed(evt);
@@ -579,6 +596,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         deleteJMenuItem.setMnemonic('D');
         deleteJMenuItem.setText("Delete Dancer");
+        deleteJMenuItem.setToolTipText("Delete Dancer");
         deleteJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteJMenuItemActionPerformed(evt);
@@ -588,6 +606,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         editJMenuItem.setMnemonic('E');
         editJMenuItem.setText("Edit Dancer");
+        editJMenuItem.setToolTipText("Edit Dancer");
         editJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editJMenuItemActionPerformed(evt);
@@ -597,6 +616,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         searchJMenuItem.setMnemonic('r');
         searchJMenuItem.setText("Search Dancer");
+        searchJMenuItem.setToolTipText("Search Dancer");
         searchJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchJMenuItemActionPerformed(evt);
@@ -611,6 +631,7 @@ public class DansaGUI extends javax.swing.JFrame {
 
         aboutJMenuItem.setMnemonic('A');
         aboutJMenuItem.setText("About");
+        aboutJMenuItem.setToolTipText("About this project!");
         aboutJMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutJMenuItemActionPerformed(evt);
@@ -643,6 +664,8 @@ public class DansaGUI extends javax.swing.JFrame {
         yearsJTextField.setEditable(true);
         phoneJTextField.setText("");
         phoneJTextField.setEditable(true);
+        emailJTextField.setText("");
+        emailJTextField.setEditable(true);
         nameJTextField.requestFocus();
 
     }
@@ -708,23 +731,46 @@ public class DansaGUI extends javax.swing.JFrame {
      * @param evt
      */
     private void editJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJButtonActionPerformed
-        //Clear and set JTextFields visible--not a good a good implementation
+        int index = this.dancersJList.getSelectedIndex();
+        try {
+            EditDancer editDancer = new EditDancer(this, true, this.dancers.get(index));
+            editDancer.setLocationRelativeTo(this);
+            editDancer.setVisible(true);
 
-        //        nameJTextField.setEditable(false);
-        //        popJTextField.setEditable(true);
-        //        medianJTextField.setEditable(true);
-        //        percentJTextField.setEditable(true);
-        //        degreeJTextField.setEditable(true);
-        //        popJTextField.requestFocus();
-        //        popJTextField.selectAll();
-        //
-        //        addJButton.setEnabled(false);
-        //        deleteJButton.setEnabled(false);
-        //        addJMenuItem.setEnabled(false);
-        //        editJMenuItem.setEnabled(true);
-        //        deleteJMenuItem.setEnabled(false);
-        //        printJMenuItem.setEnabled(false);
-        //degreeJTextFieldActionPerformed(evt);
+            // The modal dialog takes focus, upon regaining focus:
+            Dancer editedDancer = editDancer.getDancer();
+            if (dancerExistsSomewhere(editedDancer, index)) {
+                JOptionPane.showMessageDialog(null, "Dancer not Edited\n"
+                                            + "A dancer with the same name\n"
+                                            + "and years of experience already"
+                                            + "\nexists somewhere else...",
+                                              "Dancer already exists",
+                                              JOptionPane.WARNING_MESSAGE);
+                dancersJList.setVisible(true);
+                dancersJList.setSelectedIndex(index);
+            } else if (editedDancer != null) {
+                // Replaces the edited dancer to the database
+                dancers.set(index, editedDancer);
+                displayDancers();                  //refresh GUI
+                searchDancer(editedDancer.getName());    //highlight edited dancer
+
+                //save new dancer to file
+                saveDancers();
+            } else {
+                JOptionPane.showMessageDialog(null, "Dancer not Edited",
+                                              "Dancer is null...",
+                                              JOptionPane.WARNING_MESSAGE);
+                dancersJList.setVisible(true);
+                dancersJList.setSelectedIndex(0);
+            }
+
+        } catch (NullPointerException nullex) {
+            JOptionPane.showMessageDialog(null, "Dancer not Edited",
+                                          "Edit cancelled",
+                                          JOptionPane.INFORMATION_MESSAGE);
+            dancersJList.setVisible(true);
+            dancersJList.setSelectedIndex(index);
+        }
     }//GEN-LAST:event_editJButtonActionPerformed
 
     /**
@@ -735,24 +781,23 @@ public class DansaGUI extends javax.swing.JFrame {
     private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
         int reply = JOptionPane.showConfirmDialog(this, "Are you sure?",
             "Confirm Dancer deletion...",
-            JOptionPane.YES_NO_OPTION);
+            JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         if (reply == JOptionPane.YES_OPTION) {
             // Delete selected dancer
             int index = this.dancersJList.getSelectedIndex();
             this.dancers.remove(index);
             displayDancers();
             saveDancers();
-        } else {
-        }
+        } else {}
     }//GEN-LAST:event_deleteJButtonActionPerformed
 
     /**
-     * Prints out the entire form.
+     * Prints out the information of the currently selected dancer.
      * @param evt
      */
     private void printJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printJButtonActionPerformed
         // Use the PrintUtilities class to print the GUI
-        PrintUtilities.printComponent(this);
+        PrintUtilities.printComponent(this.displayJPanel);
     }//GEN-LAST:event_printJButtonActionPerformed
 
     /**
@@ -903,6 +948,23 @@ public class DansaGUI extends javax.swing.JFrame {
     {
         for (int i = 0; i < dancers.size(); i++) {
             if (dancario.equals(dancers.get(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Method: dancerExists
+     * Performs linear search through Dancer list, `this.dancers`,
+     * to determine if the specified Dancer object exists.
+     * @param dancario - Dancer whose existence is in question
+     * @return boolean true if the dancer exists.
+     */
+    private boolean dancerExistsSomewhere(Dancer dancario, int index)
+    {
+        for (int i = 0; i < dancers.size(); i++) {
+            if (dancario.equals(dancers.get(i)) && i != index) {
                 return true;
             }
         }

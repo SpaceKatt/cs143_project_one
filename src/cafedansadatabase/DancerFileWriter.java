@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 thomas.kercheval
+ * Copyright (C) 2016 Thomas Kercheval
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -81,7 +81,7 @@ class DancerFileWriter {
             line += dancer.getEmail();
             newLines.add(line);
         }
-        newLines.stream().forEach(System.out::println);
+        //newLines.stream().forEach(System.out::println);
         return newLines;
     }
 
