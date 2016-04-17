@@ -42,6 +42,7 @@ public class AboutJFrame extends javax.swing.JDialog {
         this.getRootPane().setDefaultButton(closeJButton);
         this.setModal(true);
         setLocationRelativeTo(null);
+        this.jTextArea1.setCaretPosition(0);
     }
 
     /**
@@ -66,6 +67,7 @@ public class AboutJFrame extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Large USA Cities About");
+        setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
         logoJLabel.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
@@ -82,10 +84,10 @@ public class AboutJFrame extends javax.swing.JDialog {
             titleJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(titleJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logoJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(titleJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(logoJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(titleJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         titleJPanelLayout.setVerticalGroup(
             titleJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,9 +103,10 @@ public class AboutJFrame extends javax.swing.JDialog {
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Here goes a lengthy description of the lab: this program displays the details of the ten largest USA cities. The cities are read from an external file in the format blah, blah,.......\n");
+        jTextArea1.setText("## Cafe Dansa Database Project\n\nA simple application for my Java class (CS143).\n\n### Project Objective:\n\nTo create an application for a dance club to keep track of members and\ntheir information.\n\n##### Features:\n\n  - Storing dancers in a database, we allow for users to add, edit, delete,\n    search, and print dancers from the club.\n  - Dancers may be listed in alphabetical order by last name or first name.\n  - Dancers may be listed in descending order of experience in years.\n  - Changes to the database are dynamic in nature, so Dancers that are\n    deleted do not reappear when the application is restarted.\n  - Both the GUI an individual's information may be printed, by the file\n    menu and the print button respectively.\n  - Splash screen is displayed on start-up.\n  - If a duplicate dancer is added to the database the action will be\n    prevented and the user will be notified without crashing the program.\n  - While editing a dancer, if their information is changed to match a\n    different dancer whom exists in the database then the dancer is not\n    edited and the user is notified without the program crashing.\n  - Fields from editing and adding Dancers are validated with regular\n    expressions.\n  - Dancer must have 2-3 (Capitalized) parts of their name to have valid\n    names.\n\n##### Notes:\n\n  - The class which adheres most rigorously to Java style standards is\n    Dancer.java\n  - This code is protected under GPL 3.0\n");
         jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -113,7 +116,7 @@ public class AboutJFrame extends javax.swing.JDialog {
             aboutJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(aboutJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
                 .addContainerGap())
         );
         aboutJPanelLayout.setVerticalGroup(
@@ -127,7 +130,7 @@ public class AboutJFrame extends javax.swing.JDialog {
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
-        copyrightJLabel.setText("copyrightJLabel");
+        copyrightJLabel.setText("Copyright 2016; Thomas Kercheval");
         jPanel1.add(copyrightJLabel);
 
         closeJButton.setText("Close");
@@ -138,7 +141,7 @@ public class AboutJFrame extends javax.swing.JDialog {
         });
         jPanel1.add(closeJButton);
 
-        warningJLabel.setText("...Warning");
+        warningJLabel.setText("If: Steal Code -> Then: Suffer Curse");
         jPanel1.add(warningJLabel);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
