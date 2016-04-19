@@ -732,7 +732,8 @@ public class DansaGUI extends javax.swing.JFrame {
             Dancer editedDancer = editDancer.getDancer();
             if (dancerExistsSomewhere(editedDancer, index)) {
                 JOptionPane.showMessageDialog(null, "Dancer not Edited\n"
-                        + "A dancer with the same name\n"
+                        + "A dancer with the same name,\n"
+                        + "style of dance,\n"
                         + "and years of experience already"
                         + "\nexists somewhere else...",
                         "Dancer already exists",

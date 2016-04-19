@@ -267,7 +267,8 @@ public class Dancer {
      */
     public boolean equals(final Dancer dancer) {
         return this.getName().equalsIgnoreCase(dancer.getName())
-               && this.getYears() == dancer.getYears();
+               && this.getYears() == dancer.getYears()
+                && this.getStyle().equalsIgnoreCase(dancer.getStyle());
     }
 
     @Override
