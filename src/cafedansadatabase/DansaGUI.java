@@ -130,7 +130,7 @@ public class DansaGUI extends javax.swing.JFrame {
         dancersJList.setListData(dancerNames);
         if (location != -1 && location < dancers.size()) {
             dancersJList.setSelectedIndex(location);
-        } else {
+        } else { // Say if the last Dancer is deleted...
             dancersJList.setSelectedIndex(0);
         }
     }
@@ -1024,18 +1024,18 @@ public class DansaGUI extends javax.swing.JFrame {
         return -1;
     }
 
-//    /**
-//     * Calls our implementation for binary search.
-//     *
-//     * @param array - Comparable type array to be searched through
-//     * @param key - Comparable type target to be searched for
-//     * @return int: the index of the target in the array.
-//     */
-//    public static int binarySearch(Comparable[] array, Comparable key) {
-//        BinarySearchName searcher = new BinarySearchName();
-//        int result = searcher.binarySearch(array, key);
-//        return -1;
-//    }
+    /**
+     * Calls our implementation for binary search.
+     *
+     * @param array - Comparable type array to be searched through
+     * @param key - Comparable type target to be searched for
+     * @return int: the index of the target in the array.
+     */
+    public static int binarySearch(Comparable[] array, Comparable key) {
+        BinarySearchName searcher = new BinarySearchName();
+        int result = searcher.binarySearch(array, key);
+        return -1;
+    }
 
     /**
      * Write dancers to a text file that is comma delimited.
