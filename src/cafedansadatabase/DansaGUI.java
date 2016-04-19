@@ -1034,7 +1034,7 @@ public class DansaGUI extends javax.swing.JFrame {
     public static int binarySearch(Comparable[] array, Comparable key) {
         BinarySearchName searcher = new BinarySearchName();
         int result = searcher.binarySearch(array, key);
-        return -1;
+        return result;
     }
 
     /**
