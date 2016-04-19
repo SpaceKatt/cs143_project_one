@@ -20,15 +20,17 @@ import java.util.ArrayList;
 
 /**
  * This class implements a simple insertion sort,
- *     to sort cities by name.
- * @author Thomas
+ *     to sort cities by last name.
+ * @author Thomas Kercheval
  */
 public class InsertionSortDancerLastName {
     /**
-     * Compares two values.
+     * Compares two values. Returns true if Dancer one has a last name with
+     * lower lexicographic order than Dancer two.
      * @param one
      * @param two
-     * @return 
+     * @return true if Dancer one has a lower lexicographic order 
+     *         than Dancer two.
      */
     private boolean less(Dancer one, Dancer two) {
         String oneName = one.getName().substring(one.getName().
@@ -40,8 +42,8 @@ public class InsertionSortDancerLastName {
     
     /**
      * Checks to make sure the ArrayList is sorted.
-     * @param list
-     * @return 
+     * @param list ArrayList of Dancer objects.
+     * @return true is ArrayList is sorted.
      */
     private boolean isSorted(ArrayList<Dancer> list) {
         for (int i = 0; i < list.size(); i++) {
@@ -52,7 +54,7 @@ public class InsertionSortDancerLastName {
     
     /**
      * Swaps two elements in an ArrayList.
-     * @param list
+     * @param list ArrayList of Dancer objects.
      * @param indexOne
      * @param indexTwo 
      */
@@ -64,7 +66,7 @@ public class InsertionSortDancerLastName {
     
     /**
      * Uses  insertion sort to sort an ArrayList of Cities by name.
-     * @param list 
+     * @param list ArrayList of Dancer objects.
      */
     public void sort(ArrayList<Dancer> list) {
         int arraySize = list.size();

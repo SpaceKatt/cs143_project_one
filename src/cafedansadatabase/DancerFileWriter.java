@@ -32,21 +32,17 @@ import java.util.logging.Logger;
     Project: CafeDansa Database
     Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
     Course: CS 143
-    Created on Apr 9, 2016, 1:34:43 PM
-    Revised on Arp 12, 2016, 2:31:23 PM
+    Created on Apr 9, 2016, 2:11:46 PM
+    Revised on Arp 14, 2016, 7:13:53 PM
  </pre>
  * @author Thomas Kercheval
  */
-class DancerFileWriter {
+public class DancerFileWriter {
 
-    /**
-     * File path (relative) to our database.
-     */
+    /** File path (relative) to our database. */
     private final String filePath;
 
-    /**
-     * List of lines to be written.
-     */
+    /** List of lines to be written. */
     private final ArrayList<String> lines;
 
     /**
@@ -55,7 +51,7 @@ class DancerFileWriter {
      * @param file Relative filePath path of Dancer database
      * @param dancers ArrayList of dancers to be written
      */
-    DancerFileWriter(String file, ArrayList<Dancer> dancers) {
+    public DancerFileWriter(String file, ArrayList<Dancer> dancers) {
         this.filePath = file;
         this.lines = createLines(dancers);
     }
@@ -81,7 +77,6 @@ class DancerFileWriter {
             line += dancer.getEmail();
             newLines.add(line);
         }
-        //newLines.stream().forEach(System.out::println);
         return newLines;
     }
 

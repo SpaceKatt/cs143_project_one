@@ -23,8 +23,8 @@ import javax.swing.JOptionPane;
 
 /**
  * EditDancer.java
- * A class which defines the form by which users may add a dancer
- * to our application.
+ * A class which defines the form by which users may edit a dancer
+ * extant in our application.
  * <pre>
     Project: CafeDansa Database
     Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
@@ -57,7 +57,7 @@ public class EditDancer extends javax.swing.JDialog {
      * @param aThis GUI which spawns EditDancer
      * @param b boolean value which indicates modality
      */
-    EditDancer(DansaGUI aThis, boolean b, Dancer oldDancer) {
+    public EditDancer(DansaGUI aThis, boolean b, Dancer oldDancer) {
         this.setModal(b);
         this.oldDancer = oldDancer;
         initComponents();
@@ -87,7 +87,7 @@ public class EditDancer extends javax.swing.JDialog {
      * Returns the new Dancer object.
      * @return Dancer: the dancer being edited.
      */
-    Dancer getDancer() {
+    public Dancer getDancer() {
         return editDancer;
     }
 
@@ -288,7 +288,7 @@ public class EditDancer extends javax.swing.JDialog {
      * @param email Email of the Dancer to be edited.
      * @return true if fields are valid.
      */
-    private boolean validateFields(String name, String phone, String email) {
+    public  boolean validateFields(String name, String phone, String email) {
         if (!Validation.isName(name)) {
             JOptionPane.showMessageDialog(this,
                                           "Must enter a valid name.\n"

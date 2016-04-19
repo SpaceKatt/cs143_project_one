@@ -20,17 +20,18 @@ import java.util.ArrayList;
 
 /**
  * SelectionSortYears.java
- 
- Implements a simple selection sort.
- * @author Thomas
+ * Implements a simple selection sort.
+ * Sorts Dancers by years of experience.
+ * @author Thomas Kercheval
  */
 public class SelectionSortYears {
     
     /**
-     * Compares two values.
-     * @param one
-     * @param two
-     * @return 
+     * Compares two values. Determines if the number of years of experience
+     * of Dancer one is less than that of Dancer two.
+     * @param one Dancer one.
+     * @param two Dancer two.
+     * @return true if Dancer one has less years of experience.
      */
     private boolean less(Dancer one, Dancer two) {
         return one.getYears() < two.getYears();
@@ -38,8 +39,8 @@ public class SelectionSortYears {
     
     /**
      * Checks to make sure the ArrayList is sorted.
-     * @param list
-     * @return 
+     * @param list ArrayList of Dancer objects.
+     * @return true if the ArrayList is sorted.
      */
     private boolean isSorted(ArrayList<Dancer> list) {
         for (int i = 0; i < list.size(); i++) {
@@ -50,7 +51,7 @@ public class SelectionSortYears {
     
     /**
      * Swaps two elements in an ArrayList.
-     * @param list
+     * @param list ArrayList of Dancer objects.
      * @param indexOne
      * @param indexTwo 
      */
@@ -61,8 +62,9 @@ public class SelectionSortYears {
     }
     
     /**
-     * Uses  insertion sort to sort an ArrayList of Cities by population.
-     * @param list 
+     * Uses insertion sort to sort an ArrayList of Dancers by years of 
+     * experience.
+     * @param list ArrayList of Dancer objects.
      */
     public void sort(ArrayList<Dancer> list) {
         int arraySize = list.size();

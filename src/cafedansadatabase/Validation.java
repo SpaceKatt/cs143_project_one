@@ -22,6 +22,11 @@ import java.util.regex.Pattern;
 /**
  * Validation.java
  * Validates the input of adding and editing Dancer objects.
+ * RegEx Patterns were found on Google.
+ * The necessary portions of the Dancer that needed validation
+ * are the Dancer Name, Phone Number, and Email. All other fields
+ * are given as a choice from a JComboBox and do not require
+ * such validation.
  * <pre>
  *  Project: CafeDansa Database
  *  Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
@@ -33,19 +38,13 @@ import java.util.regex.Pattern;
  */
 public class Validation {
     
-    /**
-     * Regex expression for email validation.
-     */
+    /** Regex expression for email validation. */
     public final static String EMAIL_PATTERN = 
             "^\\s*[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\\s*$";
-    /**
-     * Regex expression for phone number validation.
-     */
+    /** Regex expression for phone number validation. */
     public final static String PHONE_PATTERN = 
             "\\D*([2-9]\\d{2})(\\D*)([2-9]\\d{2})(\\D*)(\\d{4})\\D*";
-    /**
-     * Regex expression for name validation.
-     */
+    /** Regex expression for name validation. */
     public final static String NAME_PATTERN = "^\\s*([A-Z][a-z]+\\s*){2,3}$";
     
     /**

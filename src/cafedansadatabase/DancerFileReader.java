@@ -40,20 +40,16 @@ import javax.swing.JOptionPane;
  */
 public class DancerFileReader {
 
-    /**
-     * Relative path to the Dancer database.
-     */
+    /** Relative path to the Dancer database. */
     private final String filePath;
-    /**
-     * BufferedReader object that will read our files, line by line.
-     */
+    /** BufferedReader object that will read our files, line by line. */
     private final BufferedReader buffRead;
 
     /**
      * Initializes File Reader, catches file not found error.
      * @param fileName String of file Path
      */
-    DancerFileReader(String fileName) {
+    public DancerFileReader(String fileName) {
         this.filePath = fileName;
         this.buffRead = createReader();
         if (this.buffRead == null) {
@@ -101,7 +97,8 @@ public class DancerFileReader {
         try {
             line = buffRead.readLine();
         } catch (IOException ex) {
-            Logger.getLogger(DancerFileReader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DancerFileReader.class.getName()).log(Level.SEVERE,
+                    null, ex);
         }
         return line;
     }
@@ -110,11 +107,12 @@ public class DancerFileReader {
      * Closes our BufferedReader object. Forgetting this step may cause
      * unexpected errors while trying to dynamically update our database.
      */
-    void close() {
+    public void close() {
         try {
             buffRead.close();
         } catch (IOException ex) {
-            Logger.getLogger(DancerFileReader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DancerFileReader.class.getName()).log(Level.SEVERE,
+                    null, ex);
         }
     }
 }

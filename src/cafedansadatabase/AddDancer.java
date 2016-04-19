@@ -36,14 +36,10 @@ import javax.swing.JOptionPane;
  */
 public class AddDancer extends javax.swing.JDialog {
 
-    /**
-     * The Dancer object which will be added to the Dancer database.
-     */
+    /** The Dancer object which will be added to the Dancer database. */
     private Dancer newDancer;
 
-    /**
-     * Creates new form AddDancer
-     */
+    /** Creates new form AddDancer */
     public AddDancer() {
         initComponents();
     }
@@ -250,8 +246,8 @@ public class AddDancer extends javax.swing.JDialog {
         String phone = phoneJTextField.getText();
         String style = (String) styleJComboBox.getSelectedItem();
         String email = emailJTextField.getText();
-        if (validateFields(name, phone, email)) {
-            try {
+        if (validateFields(name, phone, email)) { // If all fields are valid
+            try {                                 // create dancer and close.
                 newDancer = new Dancer(name, style, prof, years, phone, email);
                 this.setVisible(false);
             } catch (NumberFormatException e) {
@@ -265,9 +261,11 @@ public class AddDancer extends javax.swing.JDialog {
 
     /**
      * Method to validate the input for a dancer.
+     * Uses a Validation class which matches our input to regex patterns.
      * @param name Name of the Dancer to be added.
      * @param phone Phone of the Dancer to be added.
      * @param email Email of the Dancer to be added.
+     * @see Validation
      * @return true if fields are valid.
      */
     private boolean validateFields(String name, String phone, String email) {
@@ -308,43 +306,6 @@ public class AddDancer extends javax.swing.JDialog {
         this.newDancer = null;
         this.setVisible(false);
     }//GEN-LAST:event_cancelJButtonActionPerformed
-
-    /**
-     * Spawns AddDancer form.
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(AddDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(AddDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(AddDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(AddDancer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new AddDancer().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addJButton;

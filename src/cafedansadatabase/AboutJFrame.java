@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 thomas.kercheval
+ * Copyright (C) 2016 Thomas Kercheval
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,9 @@ package cafedansadatabase;
 
 /**
  * AboutJFrame.java
- A class representing the GUI used in a maintaining a dancers database.
+ * An about frame that is accessible from the help menu on the DansaGUI.
+ * Gives general information about the project that is also found in the
+ * project README.
  * <pre>
     Project: Cafe Dansa Database
     Platform: jdk 1.8.0_14; NetBeans IDE 8.1; Windows 10
@@ -34,9 +36,7 @@ package cafedansadatabase;
 
 public class AboutJFrame extends javax.swing.JDialog {
 
-    /**
-     * Spawns our JDialog to show information about our project.
-     */
+    /** Spawns our JDialog to show information about our project. */
     public AboutJFrame() {
         initComponents();
         this.getRootPane().setDefaultButton(closeJButton);
@@ -106,7 +106,7 @@ public class AboutJFrame extends javax.swing.JDialog {
         jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("## Cafe Dansa Database Project\n\nA simple application for my Java class (CS143).\n\n### Project Objective:\n\nTo create an application for a dance club to keep track of members and\ntheir information.\n\n##### Features:\n\n  - Storing dancers in a database, we allow for users to add, edit, delete,\n    search, and print dancers from the club.\n  - Dancers may be listed in alphabetical order by last name or first name.\n  - Dancers may be listed in descending order of experience in years.\n  - Changes to the database are dynamic in nature, so Dancers that are\n    deleted do not reappear when the application is restarted.\n  - Both the GUI an individual's information may be printed, by the file\n    menu and the print button respectively.\n  - Splash screen is displayed on start-up.\n  - If a duplicate dancer is added to the database the action will be\n    prevented and the user will be notified without crashing the program.\n  - While editing a dancer, if their information is changed to match a\n    different dancer whom exists in the database then the dancer is not\n    edited and the user is notified without the program crashing.\n  - Fields from editing and adding Dancers are validated with regular\n    expressions.\n  - Dancer must have 2-3 (Capitalized) parts of their name to have valid\n    names.\n\n##### Notes:\n\n  - The class which adheres most rigorously to Java style standards is\n    Dancer.java\n  - This code is protected under GPL 3.0\n");
+        jTextArea1.setText("## Cafe Dansa Database Project\n\nA simple application for my Java class (CS143).\n\n### Project Objective:\n\nTo create an application for a dance club to keep track of members and\ntheir information.\n\n##### Features:\n\n  - Storing dancers in a database, we allow for users to add, edit, delete,\n    search, and print dancers from the club.\n  - Dancers may be listed in alphabetical order by last name or first name.\n  - Dancers may be listed in descending order of experience in years.\n  - Changes to the database are dynamic in nature, so Dancers that are\n    deleted do not reappear when the application is restarted.\n  - Both the GUI and individual's information may be printed, by the file\n    menu and the print button respectively.\n  - Splash screen is displayed on start-up.\n  - If a duplicate dancer is added to the database the action will be\n    prevented and the user will be notified without crashing the program.\n  - While editing a dancer, if their information is changed to match a\n    different dancer, whom exists in the database, then the dancer is not\n    edited and the user is notified without the program crashing.\n  - Fields from editing and adding Dancers are validated with regular\n    expressions.\n  - Dancer must have 2-3 (Capitalized) parts of their name to have valid\n    names.\n  - Style, proficiency, and years of experience are automatically valid\n    since they are options in a JComboBox and hence don't require\n    validation.\n  - Dancer deletion is confirmed before performed.\n  - Full ToolTips are provided to help ease the user experience.\n\n##### Notes:\n\n  - The class which adheres most rigorously to Java style standards is\n    Dancer.java\n  - This code is protected under GPL 3.0\n  - This project is backed up on GitHub. More atomic commits would've been\n    possible if I had access to git at school. I'm considering writing a\n    letter to the school and petition them to install it.\n  - Press Enter to close this window\n");
         jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 

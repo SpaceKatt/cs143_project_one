@@ -19,7 +19,7 @@ package cafedansadatabase;
 
 /**
  * Dancer.java
- * Abstract Data Type describing a dancer with various information
+ * Data Type describing a dancer with various information
  * attached to it. These Dancer objects will be used to populate
  * the database in our application.
  * <pre>
@@ -31,7 +31,7 @@ package cafedansadatabase;
  </pre>
  * @author Thomas Kercheval
  */
-class Dancer {
+public class Dancer {
 
     /** Name of the Dancer. */
     private String dancerName;
@@ -80,7 +80,7 @@ class Dancer {
     /**
      * Default constructor, sets everything to the default value.
      */
-    Dancer() {
+    public Dancer() {
         this.dancerName = "";
         this.style = "";
         this.prof = "";
@@ -98,7 +98,7 @@ class Dancer {
      * @param phoneNum Phone number of our Dancer.
      * @param emailAdd Email address of our Dancer.
      */
-    Dancer(final String name, final String styleDance, final String proficiency,
+    public Dancer(final String name, final String styleDance, final String proficiency,
            final int yearsExp, final String phoneNum, final String emailAdd) {
         this.dancerName = name;
         this.style = styleDance;
@@ -117,7 +117,7 @@ class Dancer {
      * @param phoneNum Phone number of our Dancer.
      * @param emailAdd Email address of our Dancer.
      */
-    Dancer(final String name, final String danceStyle, final String proficiency,
+    public Dancer(final String name, final String danceStyle, final String proficiency,
           final String yearsExp, final String phoneNum, final String emailAdd) {
         this.dancerName = name;
         this.style = danceStyle;
@@ -129,9 +129,10 @@ class Dancer {
 
     /**
      * Array constructor, takes an array of values as an input.
-     * @param dancerInfo Array containing our Dancer's info. (ordered)
+     * @param dancerInfo Array containing our Dancer's info. Ordered by 
+     * static constants in this class.
      */
-    Dancer(final String[] dancerInfo) {
+    public Dancer(final String[] dancerInfo) {
         this.dancerName = dancerInfo[NAME_INDEX];
         this.style = dancerInfo[STYLE_INDEX];
         this.prof = dancerInfo[PROF_INDEX];
@@ -142,9 +143,9 @@ class Dancer {
 
     /**
      * Copy constructor, copies another Dancer object.
-     * @param dancer Other dancer being compared to this.
+     * @param dancer Other dancer being cloned.
      */
-    Dancer(final Dancer dancer) {
+    public Dancer(final Dancer dancer) {
         this.dancerName = dancer.dancerName;
         this.style = dancer.style;
         this.prof = dancer.prof;
