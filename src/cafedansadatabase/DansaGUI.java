@@ -680,6 +680,7 @@ public class DansaGUI extends javax.swing.JFrame {
      * @see AddDancer The form used to add a dancer.
      */
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        int location = this.dancersJList.getSelectedIndex();
         // Add new dancer
         try {
             // Create and display a new AddDialog
@@ -703,14 +704,14 @@ public class DansaGUI extends javax.swing.JFrame {
                         "Dancer is null or already exists",
                         JOptionPane.WARNING_MESSAGE);
                 dancersJList.setVisible(true);
-                dancersJList.setSelectedIndex(0);
+                dancersJList.setSelectedIndex(location);
             }
         } catch (NullPointerException nullex) {
             JOptionPane.showMessageDialog(null, "Dancer not Added",
                     "Input Error",
                     JOptionPane.WARNING_MESSAGE);
             dancersJList.setVisible(true);
-            dancersJList.setSelectedIndex(0);
+            dancersJList.setSelectedIndex(location);
         }
     }//GEN-LAST:event_addJButtonActionPerformed
 
