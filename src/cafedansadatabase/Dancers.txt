@@ -6,10 +6,10 @@ Michael Ryan Flatley,irish step dancing,intemediate,30,254-113-6457,flastley@iri
 Magan Gopal,salsa,intemediate,6,206-675-1280,gopal@salsa.com
 Michael Jackson,modern pop,advanced,9,303-313-5455,michael@pop.com
 Gene Kelly,ballroom,beginner,12,707-945-7765,kelly@ballroom.com
-Thomas Kercheval,firedancing,advanced,6,206.997.5464,thomas.kercheval@email.net
+Thomas Kercheval,firedancing,advanced,6,[206]997.5464,thomas.kercheval@email.net
 Luara como Lino,samba,advanced,18,452-257-6733,nijinsky@ballet.com
 Cherie Magnus,milonga,beginner,5,206-675-1280,magus@milonga.com
 Vaslav Nijinsky,ballet,master,40,206-675-1280,nijinsky@ballet.net
 Anna Pavlova,ballet,expert,32,425-125-9874,ana.pavlova@dance.com
-Rags Sharqi,baladi,advanced,14,684-031-3210,rags.sharqi@baladi.com
+Rags Sharqi,baladi,advanced,14,684-131-3210,rags.sharqi@baladi.com
 Sukshinder Shinda,bhangra,beginner,2,661-038-9512,sshinda@bhangra.com

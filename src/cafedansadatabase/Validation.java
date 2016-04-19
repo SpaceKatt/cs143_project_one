@@ -43,7 +43,7 @@ public class Validation {
             "^\\s*[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\\s*$";
     /** Regex expression for phone number validation. */
     public final static String PHONE_PATTERN = 
-            "\\D*([2-9]\\d{2})(\\D*)([2-9]\\d{2})(\\D*)(\\d{4})\\D*";
+            "\\D*([0-9]\\d{2})(\\D*)([0-9]\\d{2})(\\D*)(\\d{4})\\D*";
     /** Regex expression for name validation. */
     public final static String NAME_PATTERN = "^\\s*([A-Z][a-z]+\\s*){2,3}$";
     
