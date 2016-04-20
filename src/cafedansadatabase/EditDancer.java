@@ -265,12 +265,6 @@ public class EditDancer extends javax.swing.JDialog {
         if (validateFields(name, phone, email)) {
             try {
                 editDancer = new Dancer(name, style, prof, years, phone, email);
-//                this.editDancer.setDancerName(name);
-//                this.editDancer.setProf(prof);
-//                this.editDancer.setStyle(style);
-//                this.editDancer.setYears(years);
-//                this.editDancer.setPhone(phone);
-//                this.editDancer.setEmail(email);
                 this.setVisible(false);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this,

@@ -43,7 +43,7 @@ public class Validation {
             "^\\s*[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\\s*$";
     /** Regex expression for phone number validation. */
     public final static String PHONE_PATTERN = 
-            "\\D*([0-9]\\d{2})(\\D*)([0-9]\\d{2})(\\D*)(\\d{4})\\D*";
+            "\\D{0,1}([0-9]\\d{2})(\\D*)([0-9]\\d{2})(\\D*)(\\d{4})";
     /** Regex expression for name validation. */
     public final static String NAME_PATTERN = "^\\s*([A-Z][a-z]+\\s*){2,3}$";
     
@@ -64,7 +64,8 @@ public class Validation {
      * @return true if input is a valid phone number
      */
     public static boolean isPhone(String field) {
-        return field.matches(PHONE_PATTERN);
+        String noLetters = "[^A-Za-z]+";
+        return field.matches(PHONE_PATTERN) && field.matches(noLetters);
     }
     
     /**
