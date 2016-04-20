@@ -66,7 +66,7 @@ public class AboutJFrame extends javax.swing.JDialog {
         warningJLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Large USA Cities About");
+        setTitle("Cafe Dansa About");
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
